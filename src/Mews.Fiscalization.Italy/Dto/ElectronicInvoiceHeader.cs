@@ -8,24 +8,27 @@ namespace Mews.Fiscalization.Italy.Dto
     public class ElectronicInvoiceHeader
     {
         [XmlElement("DatiTrasmissione", Form = XmlSchemaForm.Unqualified)]
-        public DatiTrasmissioneType DatiTrasmissione { get; set; }
+        public TransmissionData TransmissionData { get; set; }
 
         [XmlElement("CedentePrestatore", Form = XmlSchemaForm.Unqualified)]
         public Provider Provider { get; set; }
 
-        [XmlElement(Form = XmlSchemaForm.Unqualified)]
-        public RappresentanteFiscaleType RappresentanteFiscale { get; set; }
+        [XmlElement("RappresentanteFiscale", Form = XmlSchemaForm.Unqualified)]
+        public TaxRepresentative TaxRepresentative { get; set; }
 
-        [XmlElement(Form = XmlSchemaForm.Unqualified)]
-        public CessionarioCommittenteType CessionarioCommittente { get; set; }
+        [XmlElement("CessionarioCommittente", Form = XmlSchemaForm.Unqualified)]
+        public Buyer Buyer { get; set; }
 
-        [XmlElement(Form = XmlSchemaForm.Unqualified)]
-        public TerzoIntermediarioSoggettoEmittenteType TerzoIntermediarioOSoggettoEmittente { get; set; }
+        /// <summary>
+        /// Required if invoices are being issued by a third party intermediary.
+        /// </summary>
+        [XmlElement("TerzoIntermediarioOSoggettoEmittente", Form = XmlSchemaForm.Unqualified)]
+        public Intermediary Intermediary { get; set; }
 
-        [XmlElement(Form = XmlSchemaForm.Unqualified)]
-        public SoggettoEmittenteType SoggettoEmittente { get; set; }
-
-        [XmlIgnore]
-        public bool SoggettoEmittenteSpecified { get; set; }
+        /// <summary>
+        /// Required if the invoice is issued by a subject other than seller/provider;
+        /// </summary>
+        [XmlElement("SoggettoEmittente", Form = XmlSchemaForm.Unqualified)]
+        public IssuerType? Issuer { get; set; }
     }
 }

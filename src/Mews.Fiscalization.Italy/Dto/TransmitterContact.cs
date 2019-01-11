@@ -5,12 +5,12 @@ using System.Xml.Serialization;
 namespace Mews.Fiscalization.Italy.Dto
 {
     [Serializable, XmlType(Namespace = "http://www.fatturapa.gov.it/sdi/fatturapa/v1.1")]
-    public class ContattiTrasmittenteType
+    public class TransmitterContact
     {
-        [XmlElement(Form = XmlSchemaForm.Unqualified, DataType = "normalizedString")]
-        public string Telefono { get; set; }
+        [XmlElement("Telefono", Form = XmlSchemaForm.Unqualified, DataType = "normalizedString")]
+        public string Phone { get; set; }
 
-        [XmlElement(Form = XmlSchemaForm.Unqualified)]
+        [XmlElement("Email", Form = XmlSchemaForm.Unqualified)]
         public string Email { get; set; }
     }
 }

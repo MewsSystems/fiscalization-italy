@@ -5,21 +5,27 @@ using System.Xml.Serialization;
 namespace Mews.Fiscalization.Italy.Dto
 {
     [Serializable, XmlType(Namespace = "http://www.fatturapa.gov.it/sdi/fatturapa/v1.1")]
-    public class DatiTrasmissioneType
+    public class TransmissionData
     {
-        [XmlElement(Form = XmlSchemaForm.Unqualified)]
-        public IdFiscaleType IdTrasmittente { get; set; }
+        [XmlElement("IdTrasmittente", Form = XmlSchemaForm.Unqualified)]
+        public SenderId TransmitterId { get; set; }
 
+        /// <summary>
+        /// Sender identification.
+        /// </summary>
         [XmlElement("ProgressivoInvio", Form = XmlSchemaForm.Unqualified, DataType = "normalizedString")]
         public string SequentialNumber { get; set; }
 
         [XmlElement("FormatoTrasmissione", Form = XmlSchemaForm.Unqualified)]
-        public FileSchemaVersion FileSchemaVersion { get; set; }
+        public TransmissionFormat TransmissionFormat { get; set; }
 
+        /// <summary>
+        /// Addressee code.
+        /// </summary>
         [XmlElement("CodiceDestinatario", Form = XmlSchemaForm.Unqualified)]
         public string FinancialOfficeId { get; set; }
 
         [XmlElement("ContattiTrasmittente", Form = XmlSchemaForm.Unqualified)]
-        public ContattiTrasmittenteType TransmitterContact { get; set; }
+        public TransmitterContact TransmitterContact { get; set; }
     }
 }

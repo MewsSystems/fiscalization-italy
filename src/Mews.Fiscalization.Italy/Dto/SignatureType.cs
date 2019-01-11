@@ -17,5 +17,6 @@ namespace Mews.Fiscalization.Italy.Dto
 
         [XmlAttribute(DataType = "ID")]
         public string Id { get; set; }
+
     }
 }

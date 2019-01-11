@@ -8,12 +8,12 @@ namespace Mews.Fiscalization.Italy.Dto
     public class DatiAnagraficiCessionarioType
     {
         [XmlElement(Form = XmlSchemaForm.Unqualified)]
-        public IdFiscaleType IdFiscaleIVA { get; set; }
+        public SenderId IdFiscaleIVA { get; set; }
 
         [XmlElement(Form = XmlSchemaForm.Unqualified)]
         public string CodiceFiscale { get; set; }
 
         [XmlElement(Form = XmlSchemaForm.Unqualified)]
-        public AnagraficaType Anagrafica { get; set; }
+        public Identity Anagrafica { get; set; }
     }
 }

@@ -5,9 +5,9 @@ using System.Xml.Serialization;
 namespace Mews.Fiscalization.Italy.Dto
 {
     [Serializable, XmlType(Namespace = "http://www.fatturapa.gov.it/sdi/fatturapa/v1.1")]
-    public class TerzoIntermediarioSoggettoEmittenteType
+    public class TaxRepresentative
     {
-        [XmlElement(Form = XmlSchemaForm.Unqualified)]
-        public DatiAnagraficiTerzoIntermediarioType DatiAnagrafici { get; set; }
+        [XmlElement("DatiAnagrafici", Form = XmlSchemaForm.Unqualified)]
+        public SimpleIdentityData IdentityData { get; set; }
     }
 }
