@@ -5,9 +5,9 @@ using System.Xml.Serialization;
 namespace Mews.Fiscalization.Italy.Dto
 {
     [Serializable, XmlType(Namespace = "http://www.fatturapa.gov.it/sdi/fatturapa/v1.1")]
-    public class DatiGeneraliType
+    public class GeneralData
     {
-        [XmlElement(Form = XmlSchemaForm.Unqualified)]
+        [XmlElement("DatiGeneraliDocumento", Form = XmlSchemaForm.Unqualified)]
         public DatiGeneraliDocumentoType DatiGeneraliDocumento { get; set; }
 
         [XmlElement("DatiOrdineAcquisto", Form = XmlSchemaForm.Unqualified)]
@@ -31,10 +31,10 @@ namespace Mews.Fiscalization.Italy.Dto
         [XmlElement("DatiDDT", Form = XmlSchemaForm.Unqualified)]
         public DatiDDTType[] DatiDDT { get; set; }
 
-        [XmlElement(Form = XmlSchemaForm.Unqualified)]
+        [XmlElement("DatiTrasporto", Form = XmlSchemaForm.Unqualified)]
         public DatiTrasportoType DatiTrasporto { get; set; }
 
-        [XmlElement(Form = XmlSchemaForm.Unqualified)]
+        [XmlElement("FatturaPrincipale", Form = XmlSchemaForm.Unqualified)]
         public FatturaPrincipaleType FatturaPrincipale { get; set; }
     }
 }
