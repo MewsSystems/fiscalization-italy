@@ -14,6 +14,6 @@ namespace Mews.Fiscalization.Italy.Dto
         public string CodiceFiscale { get; set; }
 
         [XmlElement(Form = XmlSchemaForm.Unqualified)]
-        public AnagraficaType Anagrafica { get; set; }
+        public Identity Anagrafica { get; set; }
     }
 }
