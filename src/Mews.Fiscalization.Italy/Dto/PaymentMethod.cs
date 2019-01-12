@@ -4,7 +4,7 @@ using System.Xml.Serialization;
 namespace Mews.Fiscalization.Italy.Dto
 {
     [Serializable, XmlType(Namespace = "http://www.fatturapa.gov.it/sdi/fatturapa/v1.1")]
-    public enum ModalitaPagamentoType
+    public enum PaymentMethod
     {
         MP01,
         MP02,

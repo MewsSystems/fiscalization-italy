@@ -5,42 +5,39 @@ using System.Xml.Serialization;
 namespace Mews.Fiscalization.Italy.Dto
 {
     [Serializable, XmlType(Namespace = "http://www.fatturapa.gov.it/sdi/fatturapa/v1.1")]
-    public class DatiRiepilogoType
+    public class PensionFundData
     {
+        [XmlElement(Form = XmlSchemaForm.Unqualified)]
+        public TipoCassaType TipoCassa { get; set; }
+
+        [XmlElement(Form = XmlSchemaForm.Unqualified)]
+        public decimal AlCassa { get; set; }
+
+        [XmlElement(Form = XmlSchemaForm.Unqualified)]
+        public decimal ImportoContributoCassa { get; set; }
+
+        [XmlElement(Form = XmlSchemaForm.Unqualified)]
+        public decimal ImponibileCassa { get; set; }
+
+        [XmlIgnore]
+        public bool ImponibileCassaSpecified { get; set; }
+
         [XmlElement(Form = XmlSchemaForm.Unqualified)]
         public decimal AliquotaIVA { get; set; }
 
         [XmlElement(Form = XmlSchemaForm.Unqualified)]
-        public NaturaType Natura { get; set; }
+        public RitenutaType Ritenuta { get; set; }
+
+        [XmlIgnore]
+        public bool RitenutaSpecified { get; set; }
+
+        [XmlElement(Form = XmlSchemaForm.Unqualified)]
+        public InvoiceLineKind Natura { get; set; }
 
         [XmlIgnore]
         public bool NaturaSpecified { get; set; }
 
-        [XmlElement(Form = XmlSchemaForm.Unqualified)]
-        public decimal SpeseAccessorie { get; set; }
-
-        [XmlIgnore]
-        public bool SpeseAccessorieSpecified { get; set; }
-
-        [XmlElement(Form = XmlSchemaForm.Unqualified)]
-        public decimal Arrotondamento { get; set; }
-
-        [XmlIgnore]
-        public bool ArrotondamentoSpecified { get; set; }
-
-        [XmlElement(Form = XmlSchemaForm.Unqualified)]
-        public decimal ImponibileImporto { get; set; }
-
-        [XmlElement(Form = XmlSchemaForm.Unqualified)]
-        public decimal Imposta { get; set; }
-
-        [XmlElement(Form = XmlSchemaForm.Unqualified)]
-        public EsigibilitaIVAType EsigibilitaIVA { get; set; }
-
-        [XmlIgnore]
-        public bool EsigibilitaIVASpecified { get; set; }
-
         [XmlElement(Form = XmlSchemaForm.Unqualified, DataType = "normalizedString")]
-        public string RiferimentoNormativo { get; set; }
+        public string RiferimentoAmministrazione { get; set; }
     }
 }

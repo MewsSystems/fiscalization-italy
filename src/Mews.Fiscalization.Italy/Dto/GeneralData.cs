@@ -8,33 +8,54 @@ namespace Mews.Fiscalization.Italy.Dto
     public class GeneralData
     {
         [XmlElement("DatiGeneraliDocumento", Form = XmlSchemaForm.Unqualified)]
-        public DatiGeneraliDocumentoType DatiGeneraliDocumento { get; set; }
+        public GeneralDocumentData GeneralDocumentData { get; set; }
 
         [XmlElement("DatiOrdineAcquisto", Form = XmlSchemaForm.Unqualified)]
-        public DatiDocumentiCorrelatiType[] DatiOrdineAcquisto { get; set; }
+        public OrderData[] OrderData { get; set; }
 
+        /// <summary>
+        /// Optional: the intention is to record the fact that the document(invoice or similar) is issued against a supply/service disciplined by a contract.
+        /// </summary>
         [XmlElement("DatiContratto", Form = XmlSchemaForm.Unqualified)]
-        public DatiDocumentiCorrelatiType[] DatiContratto { get; set; }
+        public OrderData[] ContractData { get; set; }
 
+        /// <summary>
+        /// Optional: the intention is to record the fact that the document(invoice or similar) is issued against a supply/service disciplined by a agreement.
+        /// </summary>
         [XmlElement("DatiConvenzione", Form = XmlSchemaForm.Unqualified)]
-        public DatiDocumentiCorrelatiType[] DatiConvenzione { get; set; }
+        public OrderData[] AgreementData { get; set; }
 
+        /// <summary>
+        /// Optional: he intention is to record the fact that the document(invoice or similar) is issued against a receipt procedure, identified and registered in internal IT systems.
+        /// </summary>
         [XmlElement("DatiRicezione", Form = XmlSchemaForm.Unqualified)]
-        public DatiDocumentiCorrelatiType[] DatiRicezione { get; set; }
+        public OrderData[] ReceptionData { get; set; }
 
+        /// <summary>
+        /// Optional: the intention is to record the fact that the document(invoice or similar) is connected t o a previously issued invoice(this is the case, for example, for credit notes or invoices for a balance connected to preceding invoices for down payments).
+        /// </summary>
         [XmlElement("DatiFattureCollegate", Form = XmlSchemaForm.Unqualified)]
-        public DatiDocumentiCorrelatiType[] DatiFattureCollegate { get; set; }
+        public OrderData[] ConnectedInvoicesData { get; set; }
 
+        /// <summary>
+        /// Required if the document can be classified as invoicing on the basis of works progress reports(SAL) with defined phases.
+       /// </summary>
         [XmlElement("DatiSAL", Form = XmlSchemaForm.Unqualified)]
-        public DatiSALType[] DatiSAL { get; set; }
+        public WorkProgressReportData[] WorkProgressReportData { get; set; }
 
+        /// <summary>
+        /// Required if there is a transport document (or, in the cases in which it is still contemplated, a packing list) which certifies the transfer of the goods from the seller to the buyer and which must be indicated on the deferred invoice.
+        /// </summary>
         [XmlElement("DatiDDT", Form = XmlSchemaForm.Unqualified)]
-        public DatiDDTType[] DatiDDT { get; set; }
+        public TransportDocumentData[] TransportDocumentData { get; set; }
 
         [XmlElement("DatiTrasporto", Form = XmlSchemaForm.Unqualified)]
-        public DatiTrasportoType DatiTrasporto { get; set; }
+        public TransportData TransportData { get; set; }
 
+        /// <summary>
+        /// Required if there is an invoice which summarises the complementary transactions of each quarter of the calendar year carried out by the carrier on behalf of the customer pursuant to art. 74, section 4, Italian Pres.Decree 633/72 .
+        /// </summary>
         [XmlElement("FatturaPrincipale", Form = XmlSchemaForm.Unqualified)]
-        public FatturaPrincipaleType FatturaPrincipale { get; set; }
+        public MainInvoice MainInvoice { get; set; }
     }
 }

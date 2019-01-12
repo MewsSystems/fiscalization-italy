@@ -14,10 +14,16 @@ namespace Mews.Fiscalization.Italy.Dto
         public string IndexNumber { get; set; }
 
         [XmlElement("CapitaleSociale", Form = XmlSchemaForm.Unqualified)]
-        public decimal? ShareCapital { get; set; }
+        public decimal ShareCapital { get; set; }
+
+        [XmlIgnore]
+        public decimal ShareCapitalSpecified { get; set; }
 
         [XmlElement("SocioUnico", Form = XmlSchemaForm.Unqualified)]
-        public ShareholderDistribution? ShareholderDistribution { get; set; }
+        public ShareholderDistribution ShareholderDistribution { get; set; }
+
+        [XmlIgnore]
+        public bool ShareholderDistributionSpecified { get; set; }
 
         [XmlElement("StatoLiquidazione", Form = XmlSchemaForm.Unqualified)]
         public LiquidationState LiquidationState { get; set; }

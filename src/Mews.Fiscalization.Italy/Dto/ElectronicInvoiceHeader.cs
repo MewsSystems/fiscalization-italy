@@ -29,6 +29,9 @@ namespace Mews.Fiscalization.Italy.Dto
         /// Required if the invoice is issued by a subject other than seller/provider;
         /// </summary>
         [XmlElement("SoggettoEmittente", Form = XmlSchemaForm.Unqualified)]
-        public IssuerType? Issuer { get; set; }
+        public IssuerType Issuer { get; set; }
+
+        [XmlIgnore]
+        public bool IssuerSpecified { get; set; }
     }
 }

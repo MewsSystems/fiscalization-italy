@@ -13,10 +13,10 @@ namespace Mews.Fiscalization.Italy.Dto
         [XmlElement("FatturaElettronicaBody", Form = XmlSchemaForm.Unqualified)]
         public ElectronicInvoiceBody[] Body { get; set; }
 
-        [XmlElement(Namespace = "http://www.w3.org/2000/09/xmldsig#")]
+        [XmlElement("Signature", Namespace = "http://www.w3.org/2000/09/xmldsig#")]
         public SignatureType Signature { get; set; }
 
-        [XmlAttribute]
-        public VersioneSchemaType versione { get; set; }
+        [XmlAttribute("versione")]
+        public VersioneSchemaType Version { get; set; }
     }
 }

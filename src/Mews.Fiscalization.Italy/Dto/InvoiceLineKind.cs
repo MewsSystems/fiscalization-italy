@@ -4,8 +4,13 @@ using System.Xml.Serialization;
 namespace Mews.Fiscalization.Italy.Dto
 {
     [Serializable, XmlType(Namespace = "http://www.fatturapa.gov.it/sdi/fatturapa/v1.1")]
-    public enum BolloVirtualeType
+    public enum InvoiceLineKind
     {
-        SI,
+        N1,
+        N2,
+        N3,
+        N4,
+        N5,
+        N6,
     }
 }

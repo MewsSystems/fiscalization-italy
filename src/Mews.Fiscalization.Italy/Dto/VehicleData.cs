@@ -5,12 +5,12 @@ using System.Xml.Serialization;
 namespace Mews.Fiscalization.Italy.Dto
 {
     [Serializable, XmlType(Namespace = "http://www.fatturapa.gov.it/sdi/fatturapa/v1.1")]
-    public class FatturaPrincipaleType
+    public class VehicleData
     {
-        [XmlElement(Form = XmlSchemaForm.Unqualified, DataType = "normalizedString")]
-        public string NumeroFatturaPrincipale { get; set; }
-
         [XmlElement(Form = XmlSchemaForm.Unqualified, DataType = "date")]
-        public DateTime DataFatturaPrincipale { get; set; }
+        public DateTime Data { get; set; }
+
+        [XmlElement(Form = XmlSchemaForm.Unqualified, DataType = "normalizedString")]
+        public string TotalePercorso { get; set; }
     }
 }

@@ -5,9 +5,9 @@ using System.Xml.Serialization;
 namespace Mews.Fiscalization.Italy.Dto
 {
     [Serializable, XmlType(Namespace = "http://www.fatturapa.gov.it/sdi/fatturapa/v1.1")]
-    public class DatiSALType
+    public class WorkProgressReportData
     {
-        [XmlElement(Form = XmlSchemaForm.Unqualified, DataType = "integer")]
-        public string RiferimentoFase { get; set; }
+        [XmlElement("RiferimentoFase", Form = XmlSchemaForm.Unqualified, DataType = "integer")]
+        public string PhaseReference { get; set; }
     }
 }

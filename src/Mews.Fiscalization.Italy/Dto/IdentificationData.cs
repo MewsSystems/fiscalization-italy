@@ -41,7 +41,10 @@ namespace Mews.Fiscalization.Italy.Dto
         /// Optional: Allows for entering information on any professional roll or association to which the seller/provider belongs, specifically the date of his/her registration. 
         /// </summary>
         [XmlElement("DataIscrizioneAlbo", Form = XmlSchemaForm.Unqualified, DataType = "date")]
-        public DateTime? AssociationRegistrationDate { get; set; }
+        public DateTime AssociationRegistrationDate { get; set; }
+
+        [XmlIgnore]
+        public bool AssociationRegistrationDateSpecified { get; set; }
 
         /// <summary>
         /// Must contain one of the codes given in the associated list; the code identifies, according to the business sector or the income situation, the tax system under which the seller/provider operates.

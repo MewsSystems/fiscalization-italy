@@ -5,7 +5,7 @@ using System.Xml.Serialization;
 namespace Mews.Fiscalization.Italy.Dto
 {
     [Serializable, XmlType(Namespace = "http://www.fatturapa.gov.it/sdi/fatturapa/v1.1")]
-    public class AltriDatiGestionaliType
+    public class OtherInvoiceLineData
     {
         [XmlElement(Form = XmlSchemaForm.Unqualified, DataType = "normalizedString")]
         public string TipoDato { get; set; }

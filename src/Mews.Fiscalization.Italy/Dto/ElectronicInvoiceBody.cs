@@ -11,15 +11,21 @@ namespace Mews.Fiscalization.Italy.Dto
         public GeneralData GeneralData { get; set; }
 
         [XmlElement("DatiBeniServizi", Form = XmlSchemaForm.Unqualified)]
-        public DatiBeniServiziType DatiBeniServizi { get; set; }
+        public ServiceData ServiceData { get; set; }
 
+        /// <summary>
+        /// Required if the documented is related to sale of new vehicles.
+        /// </summary>
         [XmlElement("DatiVeicoli", Form = XmlSchemaForm.Unqualified)]
-        public DatiVeicoliType DatiVeicoli { get; set; }
+        public VehicleData VehicleData { get; set; }
 
+        /// <summary>
+        /// Required if there are any payment conditions/deadlines.
+        /// </summary>
         [XmlElement("DatiPagamento", Form = XmlSchemaForm.Unqualified)]
-        public DatiPagamentoType[] DatiPagamento { get; set; }
+        public PaymentData[] PaymentData { get; set; }
 
         [XmlElement("Allegati", Form = XmlSchemaForm.Unqualified)]
-        public AllegatiType[] Allegati { get; set; }
+        public InvoiceAttachment[] Attachments { get; set; }
     }
 }
