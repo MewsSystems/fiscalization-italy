@@ -10,12 +10,24 @@ namespace Mews.Fiscalization.Italy.Tests
         [Test]
         public void Test()
         {
-            var generalData = new GeneralDocumentData
+            var invoice = new ElectronicInvoice
             {
-                Art73 = Art73Type.SI
+                Body = new[]
+                {
+                    new ElectronicInvoiceBody
+                    {
+                        GeneralData = new GeneralData
+                        {
+                            GeneralDocumentData = new GeneralDocumentData
+                            {
+                                CurrencyCode = "EUR"
+                            }
+                        }
+                    }
+                }
             };
 
-            var serialized = XmlManipulator.Serialize(generalData);
+            var xml = XmlManipulator.Serialize(invoice).OuterXml;
         }
     }
 }

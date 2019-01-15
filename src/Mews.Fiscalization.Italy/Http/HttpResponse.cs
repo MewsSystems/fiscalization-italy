@@ -1,17 +1,21 @@
-﻿using FuncSharp;
+﻿using System.Collections.Generic;
+using System.Net;
 
 namespace Mews.Fiscalization.Italy.Http
 {
-    public class HttpResponse : Coproduct2<HttpResponseContent, HttpError>
+    public class HttpResponse
     {
-        public HttpResponse(HttpResponseContent content)
-            : base(content)
+        public HttpResponse(HttpStatusCode code, HttpContent content, Dictionary<string, string> headers)
         {
+            Code = code;
+            Content = content;
+            Headers = headers;
         }
 
-        public HttpResponse(HttpError error)
-            : base(error)
-        {
-        }
+        public HttpStatusCode Code { get; }
+
+        public HttpContent Content { get; }
+
+        public Dictionary<string, string> Headers { get; }
     }
 }
