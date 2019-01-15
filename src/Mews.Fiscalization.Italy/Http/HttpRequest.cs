@@ -1,18 +1,19 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Mews.Fiscalization.Italy.Http
 {
     public class HttpRequest
     {
-        public HttpRequest(string url, HttpMethod method, HttpContent content, Dictionary<string, string> headers)
+        public HttpRequest(Uri uri, HttpMethod method, HttpContent content, Dictionary<string, string> headers)
         {
-            Url = url;
+            Uri = uri;
             Method = method;
             Headers = headers;
             Content = content;
         }
 
-        public string Url { get; }
+        public Uri Uri { get; }
 
         public HttpMethod Method { get; }
 

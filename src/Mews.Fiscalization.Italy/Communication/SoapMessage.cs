@@ -33,8 +33,10 @@ namespace Mews.Fiscalization.Italy.Communication
 
         public XmlDocument GetXmlDocument()
         {
-            var xmlDocument = new XmlDocument();
-            xmlDocument.PreserveWhitespace = true;
+            var xmlDocument = new XmlDocument
+            {
+                PreserveWhitespace = true
+            };
 
             var soapEnvelopeElement = xmlDocument.CreateElement("s", "Envelope", "http://schemas.xmlsoap.org/soap/envelope/");
             soapEnvelopeElement.SetAttribute("xmlns:u", "http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd");

@@ -1,5 +1,4 @@
 ﻿using Mews.Fiscalization.Italy.Dto;
-using Mews.Sdi;
 using NUnit.Framework;
 
 namespace Mews.Fiscalization.Italy.Tests
