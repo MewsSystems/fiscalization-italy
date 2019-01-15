@@ -56,7 +56,7 @@ namespace Mews.Fiscalization.Italy.Dto
         public bool VatDueDateSpecified { get; set; }
 
         /// <summary>
-        /// Required if Kind is filled in and therefore  in  the  case  of transactions  which are  exempt from  VAT or  in the case of a reversed charge.
+        /// Required if Kind is filled in and therefore in the case of transactions which are exempt from  VAT or in the case of a reversed charge.
         /// </summary>
         [XmlElement("RiferimentoNormativo", Form = XmlSchemaForm.Unqualified, DataType = "normalizedString")]
         public string ReferenceProvision { get; set; }

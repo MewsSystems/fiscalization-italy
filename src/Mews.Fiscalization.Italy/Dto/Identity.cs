@@ -7,25 +7,26 @@ namespace Mews.Fiscalization.Italy.Dto
     [Serializable, XmlType(Namespace = "http://www.fatturapa.gov.it/sdi/fatturapa/v1.1")]
     public class Identity
     {
-        /// <summary>
-        /// Companies use Denominazione, natural persons use Nome and Cognome.
-        /// </summary>
-        [XmlElement("Cognome", typeof(string), Form = XmlSchemaForm.Unqualified, DataType = "normalizedString"), XmlElement("Denominazione", typeof(string), Form = XmlSchemaForm.Unqualified, DataType = "normalizedString"), XmlElement("Nome", typeof(string), Form = XmlSchemaForm.Unqualified, DataType = "normalizedString"), XmlChoiceIdentifier("ItemsElementName")]
-        public string[] Items { get; set; }
+        [XmlElement("Nome", Form = XmlSchemaForm.Unqualified, DataType = "normalizedString")]
+        public string FirstName { get; set; }
 
-        [XmlElement("ItemsElementName"), XmlIgnore]
-        public ItemsChoiceType[] ItemsElementName { get; set; }
+        [XmlElement("Cognome", Form = XmlSchemaForm.Unqualified, DataType = "normalizedString")]
+        public string LastName { get; set; }
+
+        [XmlElement("Denominazione", Form = XmlSchemaForm.Unqualified, DataType = "normalizedString")]
+        public string CompanyName { get; set; }
+
 
         /// <summary>
         /// Optional.
         /// </summary>
-        [XmlElement(Form = XmlSchemaForm.Unqualified, DataType = "normalizedString")]
-        public string Titolo { get; set; }
+        [XmlElement("Titolo", Form = XmlSchemaForm.Unqualified, DataType = "normalizedString")]
+        public string Title { get; set; }
 
         /// <summary>
         /// Optional: Economic Operator Registration and Identification.
         /// </summary>
-        [XmlElement(Form = XmlSchemaForm.Unqualified)]
-        public string CodEORI { get; set; }
+        [XmlElement("CodEORI", Form = XmlSchemaForm.Unqualified)]
+        public string EoriCode { get; set; }
     }
 }

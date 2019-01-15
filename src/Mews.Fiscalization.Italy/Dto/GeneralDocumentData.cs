@@ -44,7 +44,7 @@ namespace Mews.Fiscalization.Italy.Dto
         public StampDutyData StampDutyData { get; set; }
 
         /// <summary>
-        /// Required if the seller/provider is a subject held to pay pension contributions to his/her own professional fund or to INPS(or to both).
+        /// Required if the seller/provider is a subject held to pay pension contributions to his/her own professional fund or to INPS (or to both).
         /// </summary>
         [XmlElement("DatiCassaPrevidenziale", Form = XmlSchemaForm.Unqualified)]
         public PensionFundData[] PensionFundData { get; set; }
@@ -87,6 +87,6 @@ namespace Mews.Fiscalization.Italy.Dto
         public Art73Type Art73 { get; set; }
 
         [XmlIgnore]
-        public Art73Type Art73Specified { get; set; }
+        public bool Art73Specified { get; set; }
     }
 }

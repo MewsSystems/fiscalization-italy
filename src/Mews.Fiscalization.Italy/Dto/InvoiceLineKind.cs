@@ -11,6 +11,9 @@ namespace Mews.Fiscalization.Italy.Dto
         N3,
         N4,
         N5,
+        /// <summary>
+        /// Reverse charge.
+        /// </summary>
         N6,
     }
 }

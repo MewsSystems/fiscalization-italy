@@ -17,7 +17,7 @@ namespace Mews.Fiscalization.Italy.Dto
         public decimal ShareCapital { get; set; }
 
         [XmlIgnore]
-        public decimal ShareCapitalSpecified { get; set; }
+        public bool ShareCapitalSpecified { get; set; }
 
         [XmlElement("SocioUnico", Form = XmlSchemaForm.Unqualified)]
         public ShareholderDistribution ShareholderDistribution { get; set; }

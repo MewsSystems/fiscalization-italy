@@ -7,6 +7,11 @@ namespace Mews.Fiscalization.Italy.Dto
     [Serializable, XmlType(Namespace = "http://www.fatturapa.gov.it/sdi/fatturapa/v1.1")]
     public class TransmissionData
     {
+        public TransmissionData()
+        {
+            TransmissionFormat = TransmissionFormat.SDI11;
+        }
+
         [XmlElement("IdTrasmittente", Form = XmlSchemaForm.Unqualified)]
         public SenderId TransmitterId { get; set; }
 
@@ -19,9 +24,6 @@ namespace Mews.Fiscalization.Italy.Dto
         [XmlElement("FormatoTrasmissione", Form = XmlSchemaForm.Unqualified)]
         public TransmissionFormat TransmissionFormat { get; set; }
 
-        /// <summary>
-        /// Addressee code.
-        /// </summary>
         [XmlElement("CodiceDestinatario", Form = XmlSchemaForm.Unqualified)]
         public string FinancialOfficeId { get; set; }
 

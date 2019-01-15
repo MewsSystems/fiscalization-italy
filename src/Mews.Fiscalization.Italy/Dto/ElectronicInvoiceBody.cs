@@ -19,9 +19,6 @@ namespace Mews.Fiscalization.Italy.Dto
         [XmlElement("DatiVeicoli", Form = XmlSchemaForm.Unqualified)]
         public VehicleData VehicleData { get; set; }
 
-        /// <summary>
-        /// Required if there are any payment conditions/deadlines.
-        /// </summary>
         [XmlElement("DatiPagamento", Form = XmlSchemaForm.Unqualified)]
         public PaymentData[] PaymentData { get; set; }
 

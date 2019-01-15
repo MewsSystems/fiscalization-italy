@@ -6,6 +6,6 @@ namespace Mews.Fiscalization.Italy.Http
     {
         public Dictionary<string, string> Headers { get; set; }
 
-        public string Value { get; set; }
+        public string Content { get; set; }
     }
 }
