@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 namespace Mews.Fiscalization.Italy.Http
 {
-    public class HttpRequest
+    public sealed class HttpRequest
     {
-        public HttpRequest(Uri uri, HttpMethod method, HttpContent content, Dictionary<string, string> headers)
+        public HttpRequest(Uri uri, HttpMethod method, HttpContent content, List<HttpHeader> headers)
         {
             Uri = uri;
             Method = method;
@@ -17,7 +17,7 @@ namespace Mews.Fiscalization.Italy.Http
 
         public HttpMethod Method { get; }
 
-        public Dictionary<string, string> Headers { get; }
+        public List<HttpHeader> Headers { get; }
 
         public HttpContent Content { get; }
     }

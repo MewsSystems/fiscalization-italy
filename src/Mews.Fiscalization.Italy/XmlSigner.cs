@@ -53,26 +53,5 @@ namespace Mews.Fiscalization.Italy
 
             return result;
         }
-
-        public static X509Certificate2 GetCertificate(string subject)
-        {
-            // otevření uživatelského úložiště certifikátů
-            X509Store store = new X509Store(StoreName.My, StoreLocation.CurrentUser);
-            store.Open(OpenFlags.OpenExistingOnly);
-
-            // načtení všech certifikátů z úložiště
-            X509Certificate2Collection certificates = store.Certificates;
-
-            // nalezení správného certifikátu
-            foreach (X509Certificate2 c in certificates)
-            {
-                if (c.Subject.Equals(subject))
-                {
-                    return c;
-                }
-            }
-
-            return null;
-        }
     }
 }

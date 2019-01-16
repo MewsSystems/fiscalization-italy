@@ -2,6 +2,7 @@
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
+using FuncSharp;
 using Mews.Fiscalization.Italy.Communication;
 using Mews.Fiscalization.Italy.Dto;
 using Mews.Fiscalization.Italy.Dto.Receive;
@@ -11,12 +12,10 @@ namespace Mews.Fiscalization.Italy
 {
     public class SdiClient
     {
-        public const string Url = "";
-
-        public SdiClient(X509Certificate2 signatureCertificate, Func<HttpRequest, Task<HttpResponse>> httpClient)
+        public SdiClient(Uri endpointUri, X509Certificate2 signatureCertificate, Func<HttpRequest, Task<ITry<HttpResponse>>> httpClient)
         {
             SignatureCertificate = signatureCertificate;
-            SoapClient = new SoapClient(new Uri(Url), httpClient);
+            SoapClient = new SoapClient(endpointUri, httpClient);
         }
 
         private X509Certificate2 SignatureCertificate { get; }
@@ -40,10 +39,15 @@ namespace Mews.Fiscalization.Italy
             };
 
             var response = await SoapClient.SendAsync<ReceiveFile, ReceiveFileResponse>(messageBody, operation: "http://www.fatturapa.it/SdIRiceviFile/RiceviFile");
-            return new SdiResponse(new SdiFileInfo(
-                receivedUtc: response.ReceivedOn,
-                sdiIdentifier: response.SdiIdentification
-            ));
+            return response.ErrorSpecified.Match(
+                t => new SdiResponse(response.Error.Match(
+                   ReceiveFileError.EI01, _ => SdiError.ServiceUnavailable
+                )),
+                f => new SdiResponse(new SdiFileInfo(
+                    receivedUtc: response.ReceivedOn,
+                    sdiIdentifier: response.SdiIdentification
+                ))
+            );
         }
     }
 }

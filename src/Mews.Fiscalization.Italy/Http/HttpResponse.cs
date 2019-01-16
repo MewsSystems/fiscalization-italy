@@ -3,9 +3,9 @@ using System.Net;
 
 namespace Mews.Fiscalization.Italy.Http
 {
-    public class HttpResponse
+    public sealed class HttpResponse
     {
-        public HttpResponse(HttpStatusCode code, HttpContent content, Dictionary<string, string> headers)
+        public HttpResponse(HttpStatusCode code, HttpContent content, List<HttpHeader> headers)
         {
             Code = code;
             Content = content;
@@ -16,6 +16,6 @@ namespace Mews.Fiscalization.Italy.Http
 
         public HttpContent Content { get; }
 
-        public Dictionary<string, string> Headers { get; }
+        public List<HttpHeader> Headers { get; }
     }
 }

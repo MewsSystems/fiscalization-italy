@@ -4,13 +4,14 @@ using System.Security;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
+using FuncSharp;
 using Mews.Fiscalization.Italy.Http;
 
 namespace Mews.Fiscalization.Italy.Communication
 {
     class SoapClient
     {
-        public SoapClient(Uri endpointUri, Func<HttpRequest, Task<HttpResponse>> httpClient)
+        public SoapClient(Uri endpointUri, Func<HttpRequest, Task<ITry<HttpResponse>>> httpClient)
         {
             EndpointUri = endpointUri;
             HttpClient = httpClient;
@@ -18,7 +19,7 @@ namespace Mews.Fiscalization.Italy.Communication
 
         private Uri EndpointUri { get; }
 
-        private Func<HttpRequest, Task<HttpResponse>> HttpClient { get; }
+        private Func<HttpRequest, Task<ITry<HttpResponse>>> HttpClient { get; }
 
         public async Task<TOut> SendAsync<TIn, TOut>(TIn messageBodyObject, string operation)
             where TIn : class, new()
@@ -32,7 +33,8 @@ namespace Mews.Fiscalization.Italy.Communication
             var xml = xmlDocument.OuterXml;
             var httpRequest = GetHttpRequest(operation, xml);
 
-            var response = await HttpClient(httpRequest);
+            // TODO: Handle exceptions properly.
+            var response = (await HttpClient(httpRequest).ConfigureAwait(continueOnCapturedContext: false)).Get();
 
             var soapBody = GetSoapBody(response.Content.Value);
             return XmlManipulator.Deserialize<TOut>(soapBody);
@@ -48,9 +50,9 @@ namespace Mews.Fiscalization.Italy.Communication
                     encoding: Encoding.UTF8,
                     mimeType: "text/xml"
                ),
-                headers: new Dictionary<string, string>
+                headers: new List<HttpHeader>
                 {
-                    ["SOAPAction"] = operation
+                    new HttpHeader("SOAPAction", operation)
                 }
             );
         }
@@ -67,6 +69,5 @@ namespace Mews.Fiscalization.Italy.Communication
             }
             return soapMessage.Body.XmlElement.FirstChild as XmlElement;
         }
-
     }
 }

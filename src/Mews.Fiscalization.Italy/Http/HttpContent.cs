@@ -2,7 +2,7 @@
 
 namespace Mews.Fiscalization.Italy.Http
 {
-    public class HttpContent
+    public sealed class HttpContent
     {
         public HttpContent(string value, Encoding encoding, string mimeType)
         {
