@@ -62,10 +62,6 @@ namespace Mews.Fiscalization.Italy.Communication
             xmlDocument.LoadXml(soapXmlString);
 
             var soapMessage = SoapMessage.FromSoapXml(xmlDocument);
-            if (!soapMessage.VerifySignature())
-            {
-                throw new SecurityException("The SOAP message signature is not valid.");
-            }
             return soapMessage.Body.XmlElement.FirstChild as XmlElement;
         }
     }

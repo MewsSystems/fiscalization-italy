@@ -60,11 +60,5 @@ namespace Mews.Fiscalization.Italy.Communication
 
             return xmlDocument;
         }
-
-        public bool VerifySignature()
-        {
-            // TODO: Signature of the response has to be verified. Note that not every response has the signature.
-            return true;
-        }
     }
 }
