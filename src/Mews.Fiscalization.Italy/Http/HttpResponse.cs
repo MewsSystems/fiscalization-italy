@@ -5,7 +5,7 @@ namespace Mews.Fiscalization.Italy.Http
 {
     public sealed class HttpResponse
     {
-        public HttpResponse(HttpStatusCode code, HttpContent content, List<HttpHeader> headers)
+        public HttpResponse(HttpStatusCode code, HttpContent content, Dictionary<string, string> headers)
         {
             Code = code;
             Content = content;
@@ -16,6 +16,6 @@ namespace Mews.Fiscalization.Italy.Http
 
         public HttpContent Content { get; }
 
-        public List<HttpHeader> Headers { get; }
+        public Dictionary<string, string> Headers { get; }
     }
 }

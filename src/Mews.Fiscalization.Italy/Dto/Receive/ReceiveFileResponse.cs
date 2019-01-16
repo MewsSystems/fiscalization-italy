@@ -28,5 +28,4 @@ namespace Mews.Fiscalization.Italy.Dto.Receive
         EI02,
         EI03,
     }
-
 }

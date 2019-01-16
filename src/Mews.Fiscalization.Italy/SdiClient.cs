@@ -39,15 +39,20 @@ namespace Mews.Fiscalization.Italy
             };
 
             var response = await SoapClient.SendAsync<ReceiveFile, ReceiveFileResponse>(messageBody, operation: "http://www.fatturapa.it/SdIRiceviFile/RiceviFile");
-            return response.ErrorSpecified.Match(
-                t => new SdiResponse(response.Error.Match(
-                   ReceiveFileError.EI01, _ => SdiError.ServiceUnavailable
-                )),
-                f => new SdiResponse(new SdiFileInfo(
-                    receivedUtc: response.ReceivedOn,
-                    sdiIdentifier: response.SdiIdentification
-                ))
-            );
+
+            if (response.ErrorSpecified)
+            {
+                return new SdiResponse(response.Error.Match(
+                   ReceiveFileError.EI01, _ => throw new InvalidOperationException("Attached file is empty."),
+                   ReceiveFileError.EI02, _ => SdiError.ServiceUnavailable,
+                   ReceiveFileError.EI03, _ => SdiError.UnauthorizedUser
+                ));
+            }
+
+            return new SdiResponse(new SdiFileInfo(
+                receivedUtc: response.ReceivedOn,
+                sdiIdentifier: response.SdiIdentification
+            ));
         }
     }
 }

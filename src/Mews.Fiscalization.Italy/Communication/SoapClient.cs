@@ -28,12 +28,11 @@ namespace Mews.Fiscalization.Italy.Communication
             var messageBodyXmlElement = XmlManipulator.Serialize(messageBodyObject).DocumentElement;
 
             var soapMessage = new SoapMessage(new SoapMessagePart(messageBodyXmlElement));
-            var xmlDocument =  soapMessage.GetXmlDocument();
+            var xmlDocument = soapMessage.GetXmlDocument();
 
             var xml = xmlDocument.OuterXml;
             var httpRequest = GetHttpRequest(operation, xml);
 
-            // TODO: Handle exceptions properly.
             var response = (await HttpClient(httpRequest).ConfigureAwait(continueOnCapturedContext: false)).Get();
 
             var soapBody = GetSoapBody(response.Content.Value);
@@ -50,9 +49,9 @@ namespace Mews.Fiscalization.Italy.Communication
                     encoding: Encoding.UTF8,
                     mimeType: "text/xml"
                ),
-                headers: new List<HttpHeader>
+                headers: new Dictionary<string, string>
                 {
-                    new HttpHeader("SOAPAction", operation)
+                    ["SOAPAction"] = operation
                 }
             );
         }

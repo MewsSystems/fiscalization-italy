@@ -3,6 +3,6 @@
     public enum SdiError
     {
         ServiceUnavailable,
-        UserNotEnabled
+        UnauthorizedUser
     }
 }
