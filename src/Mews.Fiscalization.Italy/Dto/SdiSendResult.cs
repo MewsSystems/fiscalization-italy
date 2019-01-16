@@ -1,17 +1,23 @@
-﻿using FuncSharp;
-
-namespace Mews.Fiscalization.Italy.Dto
+﻿namespace Mews.Fiscalization.Italy.Dto
 {
-    public class SdiResponse : Coproduct2<SdiFileInfo, SdiError>
+    public class SdiResponse
     {
-        public SdiResponse(SdiFileInfo sdiFileInfo)
-            : base(sdiFileInfo)
+        public SdiResponse(SdiFileInfo sdiFIleInfo)
         {
+            SdiFIleInfo = sdiFIleInfo;
         }
 
-        public SdiResponse(SdiError sdiError)
-            : base(sdiError)
+        public SdiResponse(SdiError error)
         {
+            Error = error;
         }
+
+        public SdiFileInfo SdiFIleInfo { get; }
+
+        public SdiError? Error { get; }
+
+        public bool IsError => Error != null;
+
+        public bool IsSucces => !IsError;
     }
 }

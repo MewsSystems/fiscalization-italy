@@ -2,7 +2,6 @@
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
-using FuncSharp;
 using Mews.Fiscalization.Italy.Communication;
 using Mews.Fiscalization.Italy.Dto;
 using Mews.Fiscalization.Italy.Dto.Receive;
@@ -12,7 +11,7 @@ namespace Mews.Fiscalization.Italy
 {
     public class SdiClient
     {
-        public SdiClient(Uri endpointUri, X509Certificate2 signatureCertificate, Func<HttpRequest, Task<ITry<HttpResponse>>> httpClient)
+        public SdiClient(Uri endpointUri, X509Certificate2 signatureCertificate, Func<HttpRequest, Task<HttpResponse>> httpClient)
         {
             SignatureCertificate = signatureCertificate;
             SoapClient = new SoapClient(endpointUri, httpClient);
@@ -42,17 +41,28 @@ namespace Mews.Fiscalization.Italy
 
             if (response.ErrorSpecified)
             {
-                return new SdiResponse(response.Error.Match(
-                   ReceiveFileError.EI01, _ => throw new InvalidOperationException("Attached file is empty."),
-                   ReceiveFileError.EI02, _ => SdiError.ServiceUnavailable,
-                   ReceiveFileError.EI03, _ => SdiError.UnauthorizedUser
-                ));
+                return new SdiResponse(GetSdiError(response.Error));
             }
 
             return new SdiResponse(new SdiFileInfo(
                 receivedUtc: response.ReceivedOn,
                 sdiIdentifier: response.SdiIdentification
             ));
+        }
+
+        private SdiError GetSdiError(ReceiveFileError error)
+        {
+            switch (error)
+            {
+                case ReceiveFileError.EI01:
+                    throw new InvalidOperationException("Attached file is empty.");
+                case ReceiveFileError.EI02:
+                    return SdiError.ServiceUnavailable;
+                case ReceiveFileError.EI03:
+                    return SdiError.UnauthorizedUser;
+            }
+
+            throw new InvalidOperationException("Unknown error.");
         }
     }
 }
