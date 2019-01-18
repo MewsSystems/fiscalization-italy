@@ -11,6 +11,6 @@ namespace Mews.Fiscalization.Italy.Dto
         public InvoiceLine[] InvoiceLines { get; set; }
 
         [XmlElement("DatiRiepilogo", Form = XmlSchemaForm.Unqualified)]
-        public TaxSummary[] TaxSummary { get; set; }
+        public TaxRateSummary[] TaxSummary { get; set; }
     }
 }

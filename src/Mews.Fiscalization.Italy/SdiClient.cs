@@ -29,12 +29,10 @@ namespace Mews.Fiscalization.Italy
             var signedInvoiceXml = signedInvoiceXmlDoc.OuterXml;
             var signedInvoiceBytes = Encoding.UTF8.GetBytes(signedInvoiceXml);
 
-            var signedInvoiceFileName = $"{Guid.NewGuid()}.xml";
-
             var messageBody = new ReceiveFile
             {
                 Content = signedInvoiceBytes,
-                FileName = signedInvoiceFileName
+                FileName = GetSignedInvoiceFileName(invoice)
             };
 
             var response = await SoapClient.SendAsync<ReceiveFile, ReceiveFileResponse>(messageBody, operation: "http://www.fatturapa.it/SdIRiceviFile/RiceviFile");
@@ -54,15 +52,22 @@ namespace Mews.Fiscalization.Italy
         {
             switch (error)
             {
-                case ReceiveFileError.EI01:
+                case ReceiveFileError.EmptyFile:
                     throw new InvalidOperationException("Attached file is empty.");
-                case ReceiveFileError.EI02:
+                case ReceiveFileError.ServiceUnavailable:
                     return SdiError.ServiceUnavailable;
-                case ReceiveFileError.EI03:
+                case ReceiveFileError.UnauthorizedUser:
                     return SdiError.UnauthorizedUser;
             }
 
             throw new InvalidOperationException("Unknown error.");
+        }
+
+        private string GetSignedInvoiceFileName(ElectronicInvoice invoice)
+        {
+            var transmitterId = invoice.Header.TransmissionData.TransmitterId;
+            var fileIdentifier = $"{transmitterId.CountryCode}{transmitterId.TaxCode}_{invoice.Header.TransmissionData.SequentialNumber}".ToUpper();
+            return $"{fileIdentifier}.xml";
         }
     }
 }

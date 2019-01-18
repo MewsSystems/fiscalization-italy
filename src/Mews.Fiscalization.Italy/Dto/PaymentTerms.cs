@@ -6,17 +6,11 @@ namespace Mews.Fiscalization.Italy.Dto
     [Serializable, XmlType(Namespace = "http://www.fatturapa.gov.it/sdi/fatturapa/v1.1")]
     public enum PaymentTerms
     {
-        /// <summary>
-        /// Installments
-        /// </summary>
-        TP01,
-        /// <summary>
-        /// Full payment in a lump sum 
-        /// </summary>
-        TP02,
-        /// <summary>
-        /// In advance
-        /// </summary>
-        TP03,
+        [XmlEnum("TP01")]
+        Installments,
+        [XmlEnum("TP02")]
+        LumpSum,
+        [XmlEnum("TP03")]
+        InAdvance,
     }
 }

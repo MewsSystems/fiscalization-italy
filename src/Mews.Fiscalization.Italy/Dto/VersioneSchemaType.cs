@@ -7,6 +7,6 @@ namespace Mews.Fiscalization.Italy.Dto
     public enum VersioneSchemaType
     {
         [XmlEnum("1.1")]
-        Item11,
+        Item11
     }
 }

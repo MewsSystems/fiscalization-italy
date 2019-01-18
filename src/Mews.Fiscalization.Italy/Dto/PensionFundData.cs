@@ -32,7 +32,7 @@ namespace Mews.Fiscalization.Italy.Dto
         public bool RitenutaSpecified { get; set; }
 
         [XmlElement(Form = XmlSchemaForm.Unqualified)]
-        public InvoiceLineKind Natura { get; set; }
+        public TaxKind Natura { get; set; }
 
         [XmlIgnore]
         public bool NaturaSpecified { get; set; }

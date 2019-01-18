@@ -92,10 +92,10 @@ namespace Mews.Fiscalization.Italy.Dto
         public bool WithholdingTaxSpecified { get; set; }
 
         /// <summary>
-        /// Required if the transaction  is  not included  in  the “taxable” transactions or in the case of a reverse charge.
+        /// Required if the transaction is not included in the "taxable" transactions or in the case of a reverse charge.
         /// </summary>
         [XmlElement("Natura", Form = XmlSchemaForm.Unqualified)]
-        public InvoiceLineKind Kind { get; set; }
+        public TaxKind Kind { get; set; }
 
         [XmlIgnore]
         public bool KindSpecified { get; set; }

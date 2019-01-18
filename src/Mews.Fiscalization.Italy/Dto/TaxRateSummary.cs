@@ -5,7 +5,7 @@ using System.Xml.Serialization;
 namespace Mews.Fiscalization.Italy.Dto
 {
     [Serializable, XmlType(Namespace = "http://www.fatturapa.gov.it/sdi/fatturapa/v1.1")]
-    public class TaxSummary
+    public class TaxRateSummary
     {
         /// <summary>
         /// Required. Percentage.
@@ -17,7 +17,7 @@ namespace Mews.Fiscalization.Italy.Dto
         /// Required if at least one of the invoice lines has Kind filled in. In those cases, this needs to match.
         /// </summary>
         [XmlElement("Natura", Form = XmlSchemaForm.Unqualified)]
-        public InvoiceLineKind Kind { get; set; }
+        public TaxKind Kind { get; set; }
 
         [XmlIgnore]
         public bool KindSpecified { get; set; }
@@ -59,6 +59,6 @@ namespace Mews.Fiscalization.Italy.Dto
         /// Required if Kind is filled in and therefore in the case of transactions which are exempt from  VAT or in the case of a reversed charge.
         /// </summary>
         [XmlElement("RiferimentoNormativo", Form = XmlSchemaForm.Unqualified, DataType = "normalizedString")]
-        public string ReferenceProvision { get; set; }
+        public string NormativeReference { get; set; }
     }
 }

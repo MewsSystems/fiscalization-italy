@@ -11,10 +11,10 @@ namespace Mews.Fiscalization.Italy.Dto.Notifications
         }
 
         [XmlElement("IdentificativoSdI", Form = XmlSchemaForm.Unqualified, DataType = "integer")]
-        public string IdentificativoSdI { get; set; }
+        public string SdiIdentification { get; set; }
 
         [XmlElement("NomeFile", Form = XmlSchemaForm.Unqualified)]
-        public string NomeFile { get; set; }
+        public string FileName { get; set; }
 
         [XmlElement("MessageId", Form = XmlSchemaForm.Unqualified)]
         public string MessageId { get; set; }

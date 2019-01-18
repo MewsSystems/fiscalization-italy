@@ -5,11 +5,11 @@ namespace Mews.Fiscalization.Italy.Http
 {
     public sealed class HttpResponse
     {
-        public HttpResponse(HttpStatusCode code, HttpContent content, Dictionary<string, string> headers)
+        public HttpResponse(HttpStatusCode code, HttpContent content = null, Dictionary<string, string> headers = null)
         {
             Code = code;
             Content = content;
-            Headers = headers;
+            Headers = headers ?? new Dictionary<string, string>();
         }
 
         public HttpStatusCode Code { get; }

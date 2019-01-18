@@ -24,8 +24,11 @@ namespace Mews.Fiscalization.Italy.Dto.Receive
     [XmlType(Namespace = "http://www.fatturapa.gov.it/sdi/ws/trasmissione/v1.0/types")]
     public enum ReceiveFileError
     {
-        EI01,
-        EI02,
-        EI03,
+        [XmlEnum("EI01")]
+        EmptyFile,
+        [XmlEnum("EI02")]
+        ServiceUnavailable,
+        [XmlEnum("EI03")]
+        UnauthorizedUser
     }
 }
