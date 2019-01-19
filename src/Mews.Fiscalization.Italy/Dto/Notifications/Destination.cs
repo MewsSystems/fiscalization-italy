@@ -7,9 +7,9 @@ namespace Mews.Fiscalization.Italy.Dto.Notifications
     public class Destination
     {
         [XmlElement("Codice", Form = XmlSchemaForm.Unqualified)]
-        public string Codice { get; set; }
+        public string Code { get; set; }
 
         [XmlElement("Descrizione", Form = XmlSchemaForm.Unqualified)]
-        public string Descrizione { get; set; }
+        public string Description { get; set; }
     }
 }

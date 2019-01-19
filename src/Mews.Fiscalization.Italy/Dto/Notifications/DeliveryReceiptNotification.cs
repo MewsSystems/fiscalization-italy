@@ -23,7 +23,7 @@ namespace Mews.Fiscalization.Italy.Dto.Notifications
         public Destination Destination { get; set; }
 
         [XmlElement("RiferimentoArchivio", Form = XmlSchemaForm.Unqualified)]
-        public Archive Archive { get; set; }
+        public InvoiceArchive InvoiceArchive { get; set; }
 
         [XmlElement("PecMessageId", Form = XmlSchemaForm.Unqualified)]
         public string CemMessageId { get; set; }

@@ -13,7 +13,7 @@ namespace Mews.Fiscalization.Italy.Dto.Notifications
         }
 
         [XmlElement("RiferimentoFattura", Form = XmlSchemaForm.Unqualified)]
-        public ReferredInvoice ReferredInvoice { get; set; }
+        public InvoiceReference InvoiceReference { get; set; }
 
         [XmlElement("Descrizione", Form = XmlSchemaForm.Unqualified)]
         public string Description { get; set; }

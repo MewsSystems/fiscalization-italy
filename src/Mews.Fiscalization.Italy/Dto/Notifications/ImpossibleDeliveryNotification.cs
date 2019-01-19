@@ -12,7 +12,7 @@ namespace Mews.Fiscalization.Italy.Dto.Notifications
         public DateTime Received { get; set; }
 
         [XmlElement("RiferimentoArchivio", Form = XmlSchemaForm.Unqualified)]
-        public Archive Archive { get; set; }
+        public InvoiceArchive InvoiceArchive { get; set; }
 
         [XmlElement("Destinatario", Form = XmlSchemaForm.Unqualified)]
         public Destination Destination { get; set; }

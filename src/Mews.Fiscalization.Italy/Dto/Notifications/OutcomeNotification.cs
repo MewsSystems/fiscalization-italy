@@ -13,7 +13,7 @@ namespace Mews.Fiscalization.Italy.Dto.Notifications
         }
 
         [XmlElement("EsitoCommittente", Form = XmlSchemaForm.Unqualified)]
-        public ClientOutcomeNotification EsitoCommittente { get; set; }
+        public ClientOutcomeNotification ClientOutcomeNotification { get; set; }
 
         [XmlElement("PecMessageId", Form = XmlSchemaForm.Unqualified)]
         public string CemMessageId { get; set; }

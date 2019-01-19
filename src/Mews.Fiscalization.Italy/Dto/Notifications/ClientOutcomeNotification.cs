@@ -15,7 +15,7 @@ namespace Mews.Fiscalization.Italy.Dto.Notifications
         public string SdiIdentification { get; set; }
 
         [XmlElement("RiferimentoFattura", Form = XmlSchemaForm.Unqualified)]
-        public ReferredInvoice ReferredInvoice { get; set; }
+        public InvoiceReference InvoiceReference { get; set; }
 
         [XmlElement("Esito", Form = XmlSchemaForm.Unqualified)]
         public ClientOutcome ClientOutcome { get; set; }
