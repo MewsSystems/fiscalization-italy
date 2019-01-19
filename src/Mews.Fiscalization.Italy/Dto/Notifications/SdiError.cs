@@ -5,12 +5,12 @@ namespace Mews.Fiscalization.Italy.Dto.Notifications
 {
     [System.ComponentModel.DesignerCategory("code")]
     [XmlType(Namespace = "http://www.fatturapa.gov.it/sdi/messaggi/v1.0")]
-    public class ErroreType
+    public class SdiError
     {
-        [XmlElement(Form = XmlSchemaForm.Unqualified)]
-        public string Codice { get; set; }
+        [XmlElement("Codice", Form = XmlSchemaForm.Unqualified)]
+        public string Code { get; set; }
 
-        [XmlElement(Form = XmlSchemaForm.Unqualified)]
-        public string Descrizione { get; set; }
+        [XmlElement("Descrizione", Form = XmlSchemaForm.Unqualified)]
+        public string Description { get; set; }
     }
 }

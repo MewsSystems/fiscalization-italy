@@ -8,17 +8,17 @@ namespace Mews.Fiscalization.Italy.Dto.Notifications
     [XmlRoot("NotificaScarto", Namespace = "http://www.fatturapa.gov.it/sdi/messaggi/v1.0", IsNullable = false)]
     public class RejectionNotification : SdiNotification
     {
-        [XmlElement(Form = XmlSchemaForm.Unqualified)]
-        public DateTime DataOraRicezione { get; set; }
+        [XmlElement("DataOraRicezione", Form = XmlSchemaForm.Unqualified)]
+        public DateTime Received { get; set; }
 
-        [XmlElement(Form = XmlSchemaForm.Unqualified)]
-        public RiferimentoArchivioType RiferimentoArchivio { get; set; }
+        [XmlElement("RiferimentoArchivio", Form = XmlSchemaForm.Unqualified)]
+        public Archive Archive { get; set; }
 
         [XmlArray(Form = XmlSchemaForm.Unqualified)]
         [XmlArrayItem("Errore", Form = XmlSchemaForm.Unqualified, IsNullable = false)]
-        public ErroreType[] ListaErrori { get; set; }
+        public SdiError[] Errors { get; set; }
 
-        [XmlElement(Form = XmlSchemaForm.Unqualified)]
-        public string PecMessageId { get; set; }
+        [XmlElement("PecMessageId", Form = XmlSchemaForm.Unqualified)]
+        public string CemMessageId { get; set; }
     }
 }

@@ -8,16 +8,16 @@ namespace Mews.Fiscalization.Italy.Dto.Notifications
     [XmlRoot("NotificaMancataConsegna", Namespace = "http://www.fatturapa.gov.it/sdi/messaggi/v1.0", IsNullable = false)]
     public class FailedDeliveryNotification : SdiNotification
     {
-        [XmlElement(Form = XmlSchemaForm.Unqualified)]
-        public DateTime DataOraRicezione { get; set; }
+        [XmlElement("DataOraRicezione", Form = XmlSchemaForm.Unqualified)]
+        public DateTime Received { get; set; }
 
-        [XmlElement(Form = XmlSchemaForm.Unqualified)]
-        public RiferimentoArchivioType RiferimentoArchivio { get; set; }
+        [XmlElement("RiferimentoArchivio", Form = XmlSchemaForm.Unqualified)]
+        public Archive Archive { get; set; }
 
-        [XmlElement(Form = XmlSchemaForm.Unqualified)]
-        public string Descrizione { get; set; }
+        [XmlElement("Descrizione", Form = XmlSchemaForm.Unqualified)]
+        public string Description { get; set; }
 
-        [XmlElement(Form = XmlSchemaForm.Unqualified)]
-        public string PecMessageId { get; set; }
+        [XmlElement("PecMessageId", Form = XmlSchemaForm.Unqualified)]
+        public string CemMessageId { get; set; }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System.Xml.Schema;
 using System.Xml.Serialization;
+using Mews.Fiscalization.Italy.Dto.XmlSignature;
 
 namespace Mews.Fiscalization.Italy.Dto.Notifications
 {
@@ -25,6 +26,7 @@ namespace Mews.Fiscalization.Italy.Dto.Notifications
         [XmlElement("Note", Form = XmlSchemaForm.Unqualified)]
         public string Note { get; set; }
 
-        // TODO: Add signature.
+        [XmlElement("Signature", Namespace = "http://www.w3.org/2000/09/xmldsig#")]
+        public Signature Signature { get; set; }
     }
 }

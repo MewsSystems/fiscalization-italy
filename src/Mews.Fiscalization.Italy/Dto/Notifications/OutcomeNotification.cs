@@ -12,13 +12,13 @@ namespace Mews.Fiscalization.Italy.Dto.Notifications
             IntermediarioConDupliceRuolo = "Si";
         }
 
-        [XmlElement(Form = XmlSchemaForm.Unqualified)]
-        public NotificaEsitoCommittenteType EsitoCommittente { get; set; }
+        [XmlElement("EsitoCommittente", Form = XmlSchemaForm.Unqualified)]
+        public ClientOutcomeNotification EsitoCommittente { get; set; }
 
-        [XmlElement(Form = XmlSchemaForm.Unqualified)]
-        public string PecMessageId { get; set; }
+        [XmlElement("PecMessageId", Form = XmlSchemaForm.Unqualified)]
+        public string CemMessageId { get; set; }
 
-        [XmlAttribute]
+        [XmlAttribute("IntermediarioConDupliceRuolo")]
         public string IntermediarioConDupliceRuolo { get; set; }
     }
 }

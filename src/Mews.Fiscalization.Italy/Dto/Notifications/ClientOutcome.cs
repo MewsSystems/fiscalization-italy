@@ -3,9 +3,11 @@
 namespace Mews.Fiscalization.Italy.Dto.Notifications
 {
     [XmlType(Namespace = "http://www.fatturapa.gov.it/sdi/messaggi/v1.0")]
-    public enum EsitoCommittenteType
+    public enum ClientOutcome
     {
-        Ec01,
-        Ec02,
+        [XmlEnum("Ec01")]
+        Approved,
+        [XmlEnum("Ec02")]
+        Rejected,
     }
 }
