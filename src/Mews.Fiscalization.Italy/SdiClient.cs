@@ -4,6 +4,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Mews.Fiscalization.Italy.Communication;
 using Mews.Fiscalization.Italy.Dto;
+using Mews.Fiscalization.Italy.Dto.Invoice;
 using Mews.Fiscalization.Italy.Dto.Receive;
 using Mews.Fiscalization.Italy.Http;
 

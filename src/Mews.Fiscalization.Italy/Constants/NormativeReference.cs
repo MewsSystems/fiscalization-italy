@@ -1,5 +1,6 @@
 ﻿using System;
 using Mews.Fiscalization.Italy.Dto;
+using Mews.Fiscalization.Italy.Dto.Invoice;
 
 namespace Mews.Fiscalization.Italy.Constants
 {
