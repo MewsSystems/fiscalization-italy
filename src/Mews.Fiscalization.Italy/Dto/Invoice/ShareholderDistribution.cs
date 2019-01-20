@@ -6,13 +6,9 @@ namespace Mews.Fiscalization.Italy.Dto.Invoice
     [Serializable, XmlType(Namespace = "http://www.fatturapa.gov.it/sdi/fatturapa/v1.1")]
     public enum ShareholderDistribution
     {
-        /// <summary>
-        /// Sole shareholder
-        /// </summary>
-        SU,
-        /// <summary>
-        /// Several shareholders
-        /// </summary>
-        SM,
+        [XmlEnum("SU")]
+        SingleShareholder,
+        [XmlEnum("SM")]
+        MultipleShareholders
     }
 }

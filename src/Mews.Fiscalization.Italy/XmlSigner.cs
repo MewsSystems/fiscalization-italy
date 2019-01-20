@@ -39,16 +39,14 @@ namespace Mews.Fiscalization.Italy
 
             var keyInfo = new KeyInfo();
             keyInfo.AddClause(new KeyInfoX509Data(certificate));
+
             signedXml.KeyInfo = keyInfo;
             signedXml.ComputeSignature();
-
-            var xmlSignature = signedXml.GetXml();
-
 
             var result = new XmlDocument();
             result.AppendChild(result.ImportNode(document.DocumentElement, true));
 
-            // připojení podpisu na konec dokumentu XML
+            var xmlSignature = signedXml.GetXml();
             result.DocumentElement.AppendChild(result.ImportNode(xmlSignature, true));
 
             return result;
