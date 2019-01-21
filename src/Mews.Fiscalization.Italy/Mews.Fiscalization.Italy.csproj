@@ -2,6 +2,14 @@
 
   <PropertyGroup>
     <TargetFrameworks>net471;</TargetFrameworks>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Authors>Mews Systems</Authors>
+    <Company>Mews Systems</Company>
+    <PackageTags>sdi fiscalization italy</PackageTags>
+    <Copyright>Copyright 2019</Copyright>
+    <Description>Client for SDI - Italian fiscal registry.</Description>
+    <PackageProjectUrl></PackageProjectUrl>
+    <RepositoryUrl>https://github.com/MewsSystems/fiscalization-italy</RepositoryUrl>
   </PropertyGroup>
 
   <ItemGroup>
