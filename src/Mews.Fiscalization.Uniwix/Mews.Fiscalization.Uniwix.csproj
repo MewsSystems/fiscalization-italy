@@ -1,0 +1,30 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net471</TargetFramework>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <Authors>Mews Systems</Authors>
+        <Company>Mews Systems</Company>
+        <PackageTags>uniwix fiscalization italy</PackageTags>
+        <Copyright>Copyright 2019</Copyright>
+        <Description>Client for Uniwix.</Description>
+        <RepositoryUrl>https://github.com/MewsSystems/fiscalization-italy</RepositoryUrl>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <Folder Include="Dto" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Mews.Fiscalization.Italy\Mews.Fiscalization.Italy.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Reference Include="System.Net.Http" />
+    </ItemGroup>
+
+</Project>

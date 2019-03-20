@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mews.Fiscalization.Italy", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mews.Fiscalization.Italy.Tests", "Mews.Fiscalization.Italy.Tests\Mews.Fiscalization.Italy.Tests.csproj", "{61B8D511-5FF0-4417-B453-9D8A63A0ECD3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mews.Fiscalization.Uniwix", "Mews.Fiscalization.Uniwix\Mews.Fiscalization.Uniwix.csproj", "{CC3A1849-5B0F-4CBD-A5A4-834DC2CD8205}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{61B8D511-5FF0-4417-B453-9D8A63A0ECD3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{61B8D511-5FF0-4417-B453-9D8A63A0ECD3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{61B8D511-5FF0-4417-B453-9D8A63A0ECD3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CC3A1849-5B0F-4CBD-A5A4-834DC2CD8205}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CC3A1849-5B0F-4CBD-A5A4-834DC2CD8205}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CC3A1849-5B0F-4CBD-A5A4-834DC2CD8205}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CC3A1849-5B0F-4CBD-A5A4-834DC2CD8205}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

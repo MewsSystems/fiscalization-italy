@@ -3,6 +3,7 @@
 *.user
 *.suo
 *.vs
+*.idea
 *.[Cc]ache
 *.bak
 *.ncb
