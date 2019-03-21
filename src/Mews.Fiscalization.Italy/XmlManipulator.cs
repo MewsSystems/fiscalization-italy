@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using System.Text;
 using System.Xml;
 using System.Xml.Serialization;
 
@@ -27,6 +28,24 @@ namespace Mews.Fiscalization.Italy
                 xmlSerializer.Serialize(writer, value);
             }
             return xmlDocument;
+        }
+
+        public static string SerializeToString<T>(T value)
+        {
+            var serializer = new XmlSerializer(value.GetType());
+            var settings = new XmlWriterSettings
+            {
+                Indent = true,
+                OmitXmlDeclaration = false,
+                Encoding = Encoding.UTF8
+            };
+
+            using (var stream = new StringWriter())
+            using (var writer = XmlWriter.Create(stream, settings))
+            {
+                serializer.Serialize(writer, value);
+                return stream.ToString();
+            }
         }
     }
 }
