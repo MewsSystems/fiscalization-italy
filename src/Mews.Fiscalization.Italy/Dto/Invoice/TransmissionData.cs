@@ -4,12 +4,12 @@ using System.Xml.Serialization;
 
 namespace Mews.Fiscalization.Italy.Dto.Invoice
 {
-    [Serializable, XmlType(Namespace = "http://www.fatturapa.gov.it/sdi/fatturapa/v1.1")]
+    [Serializable, XmlType(Namespace = "http://ivaservizi.agenziaentrate.gov.it/docs/xsd/fatture/v1.2")]
     public class TransmissionData
     {
         public TransmissionData()
         {
-            TransmissionFormat = TransmissionFormat.SDI11;
+            TransmissionFormat = TransmissionFormat.FPA12;
         }
 
         [XmlElement("IdTrasmittente", Form = XmlSchemaForm.Unqualified)]

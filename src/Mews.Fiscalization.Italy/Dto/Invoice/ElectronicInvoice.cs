@@ -5,7 +5,7 @@ using Mews.Fiscalization.Italy.Dto.XmlSignature;
 
 namespace Mews.Fiscalization.Italy.Dto.Invoice
 {
-    [Serializable, XmlType(Namespace = "http://www.fatturapa.gov.it/sdi/fatturapa/v1.1"), XmlRoot("FatturaElettronica", Namespace = "http://www.fatturapa.gov.it/sdi/fatturapa/v1.1", IsNullable = false)]
+    [Serializable, XmlType(Namespace = "http://ivaservizi.agenziaentrate.gov.it/docs/xsd/fatture/v1.2"), XmlRoot("FatturaElettronica", Namespace = "http://ivaservizi.agenziaentrate.gov.it/docs/xsd/fatture/v1.2", IsNullable = false)]
     public class ElectronicInvoice
     {
         [XmlElement("FatturaElettronicaHeader", Form = XmlSchemaForm.Unqualified)]
