@@ -7,6 +7,9 @@ namespace Mews.Fiscalization.Italy.Dto.Invoice
     [Serializable, XmlType(Namespace = ElectronicInvoice.Namespace)]
     public class GeneralDocumentData
     {
+        private decimal _totalAmount;
+        private decimal _rounding;
+
         /// <summary>
         /// Required.
         /// </summary>
@@ -59,7 +62,11 @@ namespace Mews.Fiscalization.Italy.Dto.Invoice
         /// Recommended. Total amount including VAT.
         /// </summary>
         [XmlElement("ImportoTotaleDocumento", Form = XmlSchemaForm.Unqualified)]
-        public decimal TotalAmount { get; set; }
+        public decimal TotalAmount
+        {
+            get { return _totalAmount; }
+            set { _totalAmount = DtoUtils.Normalize(value); }
+        }
 
         [XmlIgnore]
         public bool TotalAmountSpecified { get; set; }
@@ -68,7 +75,11 @@ namespace Mews.Fiscalization.Italy.Dto.Invoice
         /// Optional.
         /// </summary>
         [XmlElement("Arrotondamento", Form = XmlSchemaForm.Unqualified)]
-        public decimal Rounding { get; set; }
+        public decimal Rounding
+        {
+            get { return _rounding; }
+            set { _rounding = DtoUtils.Normalize(value); }
+        }
 
         [XmlIgnore]
         public bool RoundingSpecified { get; set; }

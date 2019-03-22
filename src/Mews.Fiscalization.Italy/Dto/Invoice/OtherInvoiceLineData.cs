@@ -14,7 +14,7 @@ namespace Mews.Fiscalization.Italy.Dto.Invoice
         public string RiferimentoTesto { get; set; }
 
         [XmlElement(Form = XmlSchemaForm.Unqualified)]
-        public decimal RiferimentoNumero { get; set; }
+        public int RiferimentoNumero { get; set; }
 
         [XmlIgnore]
         public bool RiferimentoNumeroSpecified { get; set; }

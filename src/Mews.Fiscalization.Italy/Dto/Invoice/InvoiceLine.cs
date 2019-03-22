@@ -7,6 +7,11 @@ namespace Mews.Fiscalization.Italy.Dto.Invoice
     [Serializable, XmlType(Namespace = ElectronicInvoice.Namespace)]
     public class InvoiceLine
     {
+        private decimal _unitCount;
+        private decimal _unitPrice;
+        private decimal _totalPrice;
+        private decimal _vatRate;
+
         /// <summary>
         /// Required.
         /// </summary>
@@ -32,7 +37,11 @@ namespace Mews.Fiscalization.Italy.Dto.Invoice
         public string Description { get; set; }
 
         [XmlElement("Quantita", Form = XmlSchemaForm.Unqualified)]
-        public decimal UnitCount { get; set; }
+        public decimal UnitCount
+        {
+            get { return _unitCount; }
+            set { _unitCount = DtoUtils.Normalize(value); }
+        }
 
         [XmlIgnore]
         public bool UnitCountSpecified { get; set; }
@@ -65,7 +74,11 @@ namespace Mews.Fiscalization.Italy.Dto.Invoice
         /// Required.
         /// </summary>
         [XmlElement("PrezzoUnitario", Form = XmlSchemaForm.Unqualified)]
-        public decimal UnitPrice { get; set; }
+        public decimal UnitPrice
+        {
+            get { return _unitPrice; }
+            set { _unitPrice = DtoUtils.Normalize(value); }
+        }
 
         /// <summary>
         /// Required if there are any.
@@ -77,13 +90,21 @@ namespace Mews.Fiscalization.Italy.Dto.Invoice
         /// Required.
         /// </summary>
         [XmlElement("PrezzoTotale", Form = XmlSchemaForm.Unqualified)]
-        public decimal TotalPrice { get; set; }
+        public decimal TotalPrice
+        {
+            get { return _totalPrice; }
+            set { _totalPrice = DtoUtils.Normalize(value); }
+        }
 
         /// <summary>
         /// Percentage of VAT rate.
         /// </summary>
         [XmlElement("AliquotaIVA", Form = XmlSchemaForm.Unqualified)]
-        public decimal VatRate { get; set; }
+        public decimal VatRate
+        {
+            get { return _vatRate; }
+            set { _vatRate = DtoUtils.Normalize(value); }
+        }
 
         [XmlElement("Ritenuta", Form = XmlSchemaForm.Unqualified)]
         public RitenutaType WithholdingTax { get; set; }

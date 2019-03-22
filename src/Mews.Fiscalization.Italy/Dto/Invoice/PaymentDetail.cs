@@ -7,6 +7,10 @@ namespace Mews.Fiscalization.Italy.Dto.Invoice
     [Serializable, XmlType(Namespace = ElectronicInvoice.Namespace)]
     public class PaymentDetail
     {
+        private decimal _paymentAmount;
+        private decimal _advancePaymentDiscount;
+        private decimal _advancePaymentPenalty;
+
         /// <summary>
         /// Optional. Only if it's different from seller/provider.
         /// </summary>
@@ -32,11 +36,15 @@ namespace Mews.Fiscalization.Italy.Dto.Invoice
         public bool PaymentTermExpiryDateSpecified { get; set; }
 
         [XmlElement("ImportoPagamento", Form = XmlSchemaForm.Unqualified)]
-        public decimal PaymentAmount { get; set; }
+        public decimal PaymentAmount
+        {
+            get { return _paymentAmount; }
+            set { _paymentAmount = DtoUtils.Normalize(value); }
+        }
 
         /// <summary>
         /// The  code  of  the  post office to  which the  payment must be sent if this is necessary for the payment method.
-          /// </summary>
+        /// </summary>
         [XmlElement("CodUfficioPostale", Form = XmlSchemaForm.Unqualified, DataType = "normalizedString")]
         public string Zip { get; set; }
 
@@ -71,7 +79,11 @@ namespace Mews.Fiscalization.Italy.Dto.Invoice
         public string Bic { get; set; }
 
         [XmlElement("ScontoPagamentoAnticipato", Form = XmlSchemaForm.Unqualified)]
-        public decimal AdvancePaymentDiscount { get; set; }
+        public decimal AdvancePaymentDiscount
+        {
+            get { return _advancePaymentDiscount; }
+            set { _advancePaymentDiscount = DtoUtils.Normalize(value); }
+        }
 
         [XmlIgnore]
         public bool AdvancePaymentDiscountSpecified { get; set; }
@@ -83,7 +95,11 @@ namespace Mews.Fiscalization.Italy.Dto.Invoice
         public bool AdvancePaymentDeadlineSpecified { get; set; }
 
         [XmlElement("PenalitaPagamentiRitardati", Form = XmlSchemaForm.Unqualified)]
-        public decimal AdvancePaymentPenalty { get; set; }
+        public decimal AdvancePaymentPenalty
+        {
+            get { return _advancePaymentPenalty; }
+            set { _advancePaymentPenalty = DtoUtils.Normalize(value); }
+        }
 
         [XmlIgnore]
         public bool AdvancePaymentPenaltySpecified { get; set; }

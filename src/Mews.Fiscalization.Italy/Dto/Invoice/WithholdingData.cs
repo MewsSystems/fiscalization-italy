@@ -7,6 +7,9 @@ namespace Mews.Fiscalization.Italy.Dto.Invoice
     [Serializable, XmlType(Namespace = ElectronicInvoice.Namespace)]
     public class WithholdingData
     {
+        private decimal _withholdingAmount;
+        private decimal _withHoldingRate;
+
         /// <summary>
         /// Required.
         /// </summary>
@@ -17,13 +20,21 @@ namespace Mews.Fiscalization.Italy.Dto.Invoice
         /// Required.
         /// </summary>
         [XmlElement("ImportoRitenuta", Form = XmlSchemaForm.Unqualified)]
-        public decimal WithholdingAmount { get; set; }
+        public decimal WithholdingAmount
+        {
+            get { return _withholdingAmount; }
+            set { _withholdingAmount = DtoUtils.Normalize(value); }
+        }
 
         /// <summary>
         /// Required. Contains percentage withheld. (20 % is represented as 20.0)
         /// </summary>
         [XmlElement("AliquotaRitenuta", Form = XmlSchemaForm.Unqualified)]
-        public decimal WithHoldingRate { get; set; }
+        public decimal WithHoldingRate
+        {
+            get { return _withHoldingRate; }
+            set { _withHoldingRate = DtoUtils.Normalize(value); }
+        }
 
         /// <summary>
         /// Required.

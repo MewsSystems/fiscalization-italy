@@ -7,6 +7,8 @@ namespace Mews.Fiscalization.Italy.Dto.Invoice
     [Serializable, XmlType(Namespace = ElectronicInvoice.Namespace)]
     public class EconomicIndexRegistration
     {
+        private decimal _shareCapital;
+
         [XmlElement("Ufficio", Form = XmlSchemaForm.Unqualified)]
         public string OfficeId { get; set; }
 
@@ -14,7 +16,11 @@ namespace Mews.Fiscalization.Italy.Dto.Invoice
         public string IndexNumber { get; set; }
 
         [XmlElement("CapitaleSociale", Form = XmlSchemaForm.Unqualified)]
-        public decimal ShareCapital { get; set; }
+        public decimal ShareCapital
+        {
+            get { return _shareCapital; }
+            set { _shareCapital = DtoUtils.Normalize(value); }
+        }
 
         [XmlIgnore]
         public bool ShareCapitalSpecified { get; set; }

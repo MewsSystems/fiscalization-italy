@@ -7,11 +7,21 @@ namespace Mews.Fiscalization.Italy.Dto.Invoice
     [Serializable, XmlType(Namespace = ElectronicInvoice.Namespace)]
     public class TaxRateSummary
     {
+        private decimal _vatRate;
+        private decimal _complementaryExpenses;
+        private decimal _rounding;
+        private decimal _taxableAmount;
+        private decimal _taxAmount;
+
         /// <summary>
         /// Required. Percentage.
         /// </summary>
         [XmlElement("AliquotaIVA", Form = XmlSchemaForm.Unqualified)]
-        public decimal VatRate { get; set; }
+        public decimal VatRate
+        {
+            get { return _vatRate; }
+            set { _vatRate = DtoUtils.Normalize(value); }
+        }
 
         /// <summary>
         /// Required if at least one of the invoice lines has Kind filled in. In those cases, this needs to match.
@@ -23,13 +33,21 @@ namespace Mews.Fiscalization.Italy.Dto.Invoice
         public bool KindSpecified { get; set; }
 
         [XmlElement("SpeseAccessorie", Form = XmlSchemaForm.Unqualified)]
-        public decimal ComplementaryExpenses { get; set; }
+        public decimal ComplementaryExpenses
+        {
+            get { return _complementaryExpenses; }
+            set { _complementaryExpenses = DtoUtils.Normalize(value); }
+        }
 
         [XmlIgnore]
         public bool ComplementaryExpensesSpecified { get; set; }
 
         [XmlElement("Arrotondamento", Form = XmlSchemaForm.Unqualified)]
-        public decimal Rounding { get; set; }
+        public decimal Rounding
+        {
+            get { return _rounding; }
+            set { _rounding = DtoUtils.Normalize(value); }
+        }
 
         [XmlIgnore]
         public bool RoundingSpecified { get; set; }
@@ -38,13 +56,21 @@ namespace Mews.Fiscalization.Italy.Dto.Invoice
         /// Required.
         /// </summary>
         [XmlElement("ImponibileImporto", Form = XmlSchemaForm.Unqualified)]
-        public decimal TaxableAmount { get; set; }
+        public decimal TaxableAmount
+        {
+            get { return _taxableAmount; }
+            set { _taxableAmount = DtoUtils.Normalize(value); }
+        }
 
         /// <summary>
         /// Required.
         /// </summary>
         [XmlElement("Imposta", Form = XmlSchemaForm.Unqualified)]
-        public decimal TaxAmount { get; set; }
+        public decimal TaxAmount
+        {
+            get { return _taxAmount; }
+            set { _taxAmount = DtoUtils.Normalize(value); }
+        }
 
         /// <summary>
         /// Required.

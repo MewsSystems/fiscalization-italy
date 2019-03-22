@@ -7,17 +7,28 @@ namespace Mews.Fiscalization.Italy.Dto.Invoice
     [Serializable, XmlType(Namespace = ElectronicInvoice.Namespace)]
     public class PriceAdjustment
     {
+        private decimal _percentage;
+        private decimal _amount;
+
         [XmlElement("Tipo", Form = XmlSchemaForm.Unqualified)]
         public PriceAdjustmentType Type { get; set; }
 
         [XmlElement("Percentuale", Form = XmlSchemaForm.Unqualified)]
-        public decimal Percentage { get; set; }
+        public decimal Percentage
+        {
+            get { return _percentage; }
+            set { _percentage = DtoUtils.Normalize(value); }
+        }
 
         [XmlIgnore]
         public bool PercentageSpecified { get; set; }
 
         [XmlElement("Importo", Form = XmlSchemaForm.Unqualified)]
-        public decimal Amount { get; set; }
+        public decimal Amount
+        {
+            get { return _amount; }
+            set { _amount = DtoUtils.Normalize(value); }
+        }
 
         [XmlIgnore]
         public bool AmountSpecified { get; set; }
