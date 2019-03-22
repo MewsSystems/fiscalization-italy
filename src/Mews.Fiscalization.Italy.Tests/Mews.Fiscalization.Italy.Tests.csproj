@@ -66,6 +66,10 @@
       <Project>{94f6a615-d185-44e5-a48e-223b44156a06}</Project>
       <Name>Mews.Fiscalization.Italy</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Mews.Fiscalization.Uniwix\Mews.Fiscalization.Uniwix.csproj">
+      <Project>{cc3a1849-5b0f-4cbd-a5a4-834dc2cd8205}</Project>
+      <Name>Mews.Fiscalization.Uniwix</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

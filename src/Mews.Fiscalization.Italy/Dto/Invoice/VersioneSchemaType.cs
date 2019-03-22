@@ -3,10 +3,12 @@ using System.Xml.Serialization;
 
 namespace Mews.Fiscalization.Italy.Dto.Invoice
 {
-    [Serializable, XmlType(Namespace = "http://ivaservizi.agenziaentrate.gov.it/docs/xsd/fatture/v1.2")]
+    [Serializable, XmlType(Namespace = ElectronicInvoice.Namespace)]
     public enum VersioneSchemaType
     {
-        [XmlEnum("1.2")]
-        Item12
+        [XmlEnum("FPA12")]
+        FPA12,
+        [XmlEnum("FPR12")]
+        FPR12
     }
 }

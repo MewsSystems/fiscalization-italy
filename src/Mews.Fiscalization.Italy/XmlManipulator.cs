@@ -17,7 +17,7 @@ namespace Mews.Fiscalization.Italy
             }
         }
 
-        public static XmlDocument Serialize<T>(T value)
+        public static XmlDocument Serialize<T>(T value, XmlSerializerNamespaces namespaces = null)
             where T : class
         {
             var xmlDocument = new XmlDocument();
@@ -25,27 +25,9 @@ namespace Mews.Fiscalization.Italy
             using (var writer = navigator.AppendChild())
             {
                 var xmlSerializer = new XmlSerializer(typeof(T));
-                xmlSerializer.Serialize(writer, value);
+                xmlSerializer.Serialize(writer, value, namespaces);
             }
             return xmlDocument;
-        }
-
-        public static string SerializeToString<T>(T value)
-        {
-            var serializer = new XmlSerializer(value.GetType());
-            var settings = new XmlWriterSettings
-            {
-                Indent = true,
-                OmitXmlDeclaration = false,
-                Encoding = Encoding.UTF8
-            };
-
-            using (var stream = new StringWriter())
-            using (var writer = XmlWriter.Create(stream, settings))
-            {
-                serializer.Serialize(writer, value);
-                return stream.ToString();
-            }
         }
     }
 }

@@ -13,48 +13,42 @@ using Newtonsoft.Json;
 
 namespace Mews.Fiscalization.Uniwix.Communication
 {
-    public class UniwixClient : IDisposable
+    public class UniwixClient
     {
         private const string UniwixBaseUrl = "https://www.uniwix.com/api/Uniwix";
 
-        public UniwixClient(UniwixClientConfiguration configuration)
+        static UniwixClient()
         {
-            HttpClient = GetHttpClient(configuration);
+            HttpClient = new HttpClient();
         }
 
-        private HttpClient HttpClient { get;}
+        public UniwixClient(UniwixClientConfiguration configuration)
+        {
+            Configuration = configuration;
+        }
+
+        private static HttpClient HttpClient { get;}
+
+        private UniwixClientConfiguration Configuration { get; }
 
         public async Task<SendInvoiceResult> SendInvoiceAsync(ElectronicInvoice invoice)
         {
             var url = $"{UniwixBaseUrl}/Invoices/Upload";
-            var xml = XmlManipulator.SerializeToString(invoice);
-            var xmlBytes = Encoding.UTF8.GetBytes(xml);
-            var fileName = $"{invoice.Header.TransmissionData.SequentialNumber}.xml";
+            var file = new ElectronicInvoiceFile(invoice);
             var content = new MultipartFormDataContent
             {
-                { new ByteArrayContent(xmlBytes), "fattura", fileName }
+                { new ByteArrayContent(file.Data), "fattura", file.FileName }
             };
 
-            using (var response = await HttpClient.PostAsync(url, content).ConfigureAwait(continueOnCapturedContext: false))
-            {
-                var uniwixResponse = await ReadJsonResponse<UniwixPostInvoiceResponseResult>(response).ConfigureAwait(continueOnCapturedContext: false);
-                if (uniwixResponse.Code != 0)
-                {
-                    throw new Exception("Something is wrong.");
-                }
-
-                return new SendInvoiceResult(uniwixResponse.Result.FileId);
-            }
+            var result = await PostAsync<UniwixPostInvoiceResponseResult>(url, content).ConfigureAwait(continueOnCapturedContext: false);
+            return new SendInvoiceResult(result.FileId);
         }
 
         public async Task<InvoiceStatus> GetInvoiceStatusAsync(string invoiceFileId)
         {
             var url = $"{UniwixBaseUrl}/Invoices/{invoiceFileId}";
-            using (var response = await HttpClient.GetAsync(url).ConfigureAwait(continueOnCapturedContext: false))
-            {
-                var uniwixResponse = await ReadJsonResponse<List<InvoiceStatus>>(response).ConfigureAwait(continueOnCapturedContext: false);
-                return uniwixResponse.Result.First();
-            }
+            var result = await GetAsync<List<InvoiceStatus>>(url).ConfigureAwait(continueOnCapturedContext: false);
+            return result.First();
         }
 
         public async Task<UniwixUser> CreateUserAsync(CreateUserParameters createUserParameters)
@@ -67,31 +61,44 @@ namespace Mews.Fiscalization.Uniwix.Communication
                 { new StringContent(createUserParameters.Description), "descrizione" },
             };
 
-            using (var response = await HttpClient.PostAsync(url, content).ConfigureAwait(continueOnCapturedContext: false))
-            {
-                return (await ReadJsonResponse<UniwixUser>(response).ConfigureAwait(continueOnCapturedContext: false)).Result;
-            }
+            return await PostAsync<UniwixUser>(url, content).ConfigureAwait(continueOnCapturedContext: false);
         }
 
-        public void Dispose()
+        private async Task<TResult> GetAsync<TResult>(string url)
         {
-            HttpClient.Dispose();
+            return await ExecuteRequestAsync<TResult>(url, HttpMethod.Get).ConfigureAwait(continueOnCapturedContext: false);
         }
 
-        private async Task<UniwixResponse<TResult>> ReadJsonResponse<TResult>(HttpResponseMessage response)
+        private async Task<TResult> PostAsync<TResult>(string url, HttpContent content)
         {
-            var rawJson = await response.Content.ReadAsStringAsync().ConfigureAwait(continueOnCapturedContext: false);
-            return JsonConvert.DeserializeObject<UniwixResponse<TResult>>(rawJson);
+            return await ExecuteRequestAsync<TResult>(url, HttpMethod.Post, content).ConfigureAwait(continueOnCapturedContext: false);
         }
 
-        private HttpClient GetHttpClient(UniwixClientConfiguration configuration)
+        private async Task<TResult> ExecuteRequestAsync<TResult>(string url, HttpMethod httpMethod, HttpContent content = null)
         {
-            var httpClient = new HttpClient();
-            var credentials = $"{configuration.Key}:{configuration.Password}";
+            var credentials = $"{Configuration.Key}:{Configuration.Password}";
             var authenticationHeaderValue = Convert.ToBase64String(Encoding.ASCII.GetBytes(credentials));
-            httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", authenticationHeaderValue);
 
-            return httpClient;
+            using (var message = new HttpRequestMessage())
+            {
+                message.RequestUri = new Uri(url);
+                message.Content = content;
+                message.Method = httpMethod;
+                message.Headers.Authorization = new AuthenticationHeaderValue("Basic", authenticationHeaderValue);
+
+                using (var httpResponse = await HttpClient.SendAsync(message).ConfigureAwait(continueOnCapturedContext: false))
+                {
+                    var json = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(continueOnCapturedContext: false);
+
+                    if (httpResponse.IsSuccessStatusCode)
+                    {
+                        return JsonConvert.DeserializeObject<UniwixResponse<TResult>>(json).Result;
+                    }
+
+                    var errorResponse = JsonConvert.DeserializeObject<UniwixResponse<string>>(json);
+                    throw new UniwixException(errorResponse.Code, errorResponse.Result);
+                }
+            }
         }
     }
 }

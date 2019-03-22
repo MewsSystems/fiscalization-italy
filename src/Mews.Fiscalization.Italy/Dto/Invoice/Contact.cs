@@ -4,7 +4,7 @@ using System.Xml.Serialization;
 
 namespace Mews.Fiscalization.Italy.Dto.Invoice
 {
-    [Serializable, XmlType(Namespace = "http://ivaservizi.agenziaentrate.gov.it/docs/xsd/fatture/v1.2")]
+    [Serializable, XmlType(Namespace = ElectronicInvoice.Namespace)]
     public class Contact
     {
         [XmlElement("Telefono", Form = XmlSchemaForm.Unqualified, DataType = "normalizedString")]
