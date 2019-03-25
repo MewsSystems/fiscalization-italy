@@ -1,6 +1,6 @@
 namespace Mews.Fiscalization.Uniwix.Communication.Dto
 {
-    internal class UniwixResponse<TResponse>
+    internal class Response<TResponse>
     {
         public int Code { get; set; }
 

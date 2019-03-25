@@ -40,15 +40,16 @@ namespace Mews.Fiscalization.Uniwix.Communication
                 { new ByteArrayContent(file.Data), "fattura", file.FileName }
             };
 
-            var result = await PostAsync<UniwixPostInvoiceResponseResult>(url, content).ConfigureAwait(continueOnCapturedContext: false);
+            var result = await PostAsync<PostInvoiceResponse>(url, content).ConfigureAwait(continueOnCapturedContext: false);
             return new SendInvoiceResult(result.FileId);
         }
 
-        public async Task<InvoiceStatus> GetInvoiceStatusAsync(string invoiceFileId)
+        public async Task<InvoiceState> GetInvoiceStateAsync(string fileId)
         {
-            var url = $"{UniwixBaseUrl}/Invoices/{invoiceFileId}";
-            var result = await GetAsync<List<InvoiceStatus>>(url).ConfigureAwait(continueOnCapturedContext: false);
-            return result.First();
+            var url = $"{UniwixBaseUrl}/Invoices/{fileId}";
+            var result = await GetAsync<List<InvoiceStateResult>>(url).ConfigureAwait(continueOnCapturedContext: false);
+            var state = result.Single();
+            return new InvoiceState(fileId, ParseSdiState(state.SdiStatus));
         }
 
         public async Task<UniwixUser> CreateUserAsync(CreateUserParameters createUserParameters)
@@ -62,6 +63,16 @@ namespace Mews.Fiscalization.Uniwix.Communication
             };
 
             return await PostAsync<UniwixUser>(url, content).ConfigureAwait(continueOnCapturedContext: false);
+        }
+
+        private SdiState ParseSdiState(string sdiState)
+        {
+            if (String.IsNullOrWhiteSpace(sdiState))
+            {
+                return SdiState.Pending;
+            }
+
+            throw new NotImplementedException("Support for other states is not implemented.");
         }
 
         private async Task<TResult> GetAsync<TResult>(string url)
@@ -92,10 +103,10 @@ namespace Mews.Fiscalization.Uniwix.Communication
 
                     if (httpResponse.IsSuccessStatusCode)
                     {
-                        return JsonConvert.DeserializeObject<UniwixResponse<TResult>>(json).Result;
+                        return JsonConvert.DeserializeObject<Response<TResult>>(json).Result;
                     }
 
-                    var errorResponse = JsonConvert.DeserializeObject<UniwixResponse<string>>(json);
+                    var errorResponse = JsonConvert.DeserializeObject<Response<string>>(json);
                     throw new UniwixException(errorResponse.Code, errorResponse.Result);
                 }
             }
