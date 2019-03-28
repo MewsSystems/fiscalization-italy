@@ -8,7 +8,8 @@ namespace Mews.Fiscalization.Uniwix.Dto
         RejectedBySdi = 3,
         DeliveryImpossible = 4,
         DeadlinePassed = 5,
-        AcceptedByClient = 6,
-        RejectedByClient = 7
+        Processed = 6,
+        AcceptedByClient = 7,
+        RejectedByClient = 8
     }
 }

@@ -2,14 +2,17 @@ namespace Mews.Fiscalization.Uniwix.Dto
 {
     public class InvoiceState
     {
-        public InvoiceState(string fileId, SdiState state)
+        public InvoiceState(string fileId, SdiState sdiState, string message)
         {
             FileId = fileId;
-            State = state;
+            SdiState = sdiState;
+            Message = message;
         }
 
         public string FileId { get; }
 
-        public SdiState State { get; }
+        public SdiState SdiState { get; }
+
+        public string Message { get; }
     }
 }
