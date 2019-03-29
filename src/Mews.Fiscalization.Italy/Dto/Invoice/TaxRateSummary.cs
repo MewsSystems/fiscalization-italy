@@ -21,7 +21,7 @@ namespace Mews.Fiscalization.Italy.Dto.Invoice
         public decimal VatRate
         {
             get { return _vatRate; }
-            set { _vatRate = DtoUtils.Normalize(value); }
+            set { _vatRate = DtoUtils.NormalizeDecimal(value); }
         }
 
         /// <summary>
@@ -37,7 +37,7 @@ namespace Mews.Fiscalization.Italy.Dto.Invoice
         public decimal ComplementaryExpenses
         {
             get { return _complementaryExpenses; }
-            set { _complementaryExpenses = DtoUtils.Normalize(value); }
+            set { _complementaryExpenses = DtoUtils.NormalizeDecimal(value); }
         }
 
         [XmlIgnore]
@@ -47,7 +47,7 @@ namespace Mews.Fiscalization.Italy.Dto.Invoice
         public decimal Rounding
         {
             get { return _rounding; }
-            set { _rounding = DtoUtils.Normalize(value); }
+            set { _rounding = DtoUtils.NormalizeDecimal(value); }
         }
 
         [XmlIgnore]
@@ -60,7 +60,7 @@ namespace Mews.Fiscalization.Italy.Dto.Invoice
         public decimal TaxableAmount
         {
             get { return _taxableAmount; }
-            set { _taxableAmount = DtoUtils.Normalize(value); }
+            set { _taxableAmount = DtoUtils.NormalizeDecimal(value); }
         }
 
         /// <summary>
@@ -70,7 +70,7 @@ namespace Mews.Fiscalization.Italy.Dto.Invoice
         public decimal TaxAmount
         {
             get { return _taxAmount; }
-            set { _taxAmount = DtoUtils.Normalize(value); }
+            set { _taxAmount = DtoUtils.NormalizeDecimal(value); }
         }
 
         /// <summary>

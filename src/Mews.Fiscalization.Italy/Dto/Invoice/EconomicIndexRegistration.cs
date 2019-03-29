@@ -19,7 +19,7 @@ namespace Mews.Fiscalization.Italy.Dto.Invoice
         public decimal ShareCapital
         {
             get { return _shareCapital; }
-            set { _shareCapital = DtoUtils.Normalize(value); }
+            set { _shareCapital = DtoUtils.NormalizeDecimal(value); }
         }
 
         [XmlIgnore]

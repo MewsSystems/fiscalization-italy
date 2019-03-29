@@ -23,7 +23,7 @@ namespace Mews.Fiscalization.Italy.Dto.Invoice
         public decimal WithholdingAmount
         {
             get { return _withholdingAmount; }
-            set { _withholdingAmount = DtoUtils.Normalize(value); }
+            set { _withholdingAmount = DtoUtils.NormalizeDecimal(value); }
         }
 
         /// <summary>
@@ -33,7 +33,7 @@ namespace Mews.Fiscalization.Italy.Dto.Invoice
         public decimal WithHoldingRate
         {
             get { return _withHoldingRate; }
-            set { _withHoldingRate = DtoUtils.Normalize(value); }
+            set { _withHoldingRate = DtoUtils.NormalizeDecimal(value); }
         }
 
         /// <summary>

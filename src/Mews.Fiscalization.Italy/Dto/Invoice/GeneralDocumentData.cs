@@ -65,7 +65,7 @@ namespace Mews.Fiscalization.Italy.Dto.Invoice
         public decimal TotalAmount
         {
             get { return _totalAmount; }
-            set { _totalAmount = DtoUtils.Normalize(value); }
+            set { _totalAmount = DtoUtils.NormalizeDecimal(value); }
         }
 
         [XmlIgnore]
@@ -78,7 +78,7 @@ namespace Mews.Fiscalization.Italy.Dto.Invoice
         public decimal Rounding
         {
             get { return _rounding; }
-            set { _rounding = DtoUtils.Normalize(value); }
+            set { _rounding = DtoUtils.NormalizeDecimal(value); }
         }
 
         [XmlIgnore]

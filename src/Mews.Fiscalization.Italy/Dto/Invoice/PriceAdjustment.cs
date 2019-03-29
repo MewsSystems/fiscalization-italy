@@ -17,7 +17,7 @@ namespace Mews.Fiscalization.Italy.Dto.Invoice
         public decimal Percentage
         {
             get { return _percentage; }
-            set { _percentage = DtoUtils.Normalize(value); }
+            set { _percentage = DtoUtils.NormalizeDecimal(value); }
         }
 
         [XmlIgnore]
@@ -27,7 +27,7 @@ namespace Mews.Fiscalization.Italy.Dto.Invoice
         public decimal Amount
         {
             get { return _amount; }
-            set { _amount = DtoUtils.Normalize(value); }
+            set { _amount = DtoUtils.NormalizeDecimal(value); }
         }
 
         [XmlIgnore]

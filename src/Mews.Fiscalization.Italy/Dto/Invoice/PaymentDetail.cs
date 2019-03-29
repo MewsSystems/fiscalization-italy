@@ -41,7 +41,7 @@ namespace Mews.Fiscalization.Italy.Dto.Invoice
         public decimal PaymentAmount
         {
             get { return _paymentAmount; }
-            set { _paymentAmount = DtoUtils.Normalize(value); }
+            set { _paymentAmount = DtoUtils.NormalizeDecimal(value); }
         }
 
         /// <summary>
@@ -61,7 +61,7 @@ namespace Mews.Fiscalization.Italy.Dto.Invoice
         public string PayerFirstName
         {
             get { return _payerFirstName; }
-            set { _payerFirstName = value.Normalize(); }
+            set { _payerFirstName = value.NormalizeString(); }
         }
 
         [XmlElement("CFQuietanzante", Form = XmlSchemaForm.Unqualified)]
@@ -92,7 +92,7 @@ namespace Mews.Fiscalization.Italy.Dto.Invoice
         public decimal AdvancePaymentDiscount
         {
             get { return _advancePaymentDiscount; }
-            set { _advancePaymentDiscount = DtoUtils.Normalize(value); }
+            set { _advancePaymentDiscount = DtoUtils.NormalizeDecimal(value); }
         }
 
         [XmlIgnore]
@@ -108,7 +108,7 @@ namespace Mews.Fiscalization.Italy.Dto.Invoice
         public decimal AdvancePaymentPenalty
         {
             get { return _advancePaymentPenalty; }
-            set { _advancePaymentPenalty = DtoUtils.Normalize(value); }
+            set { _advancePaymentPenalty = DtoUtils.NormalizeDecimal(value); }
         }
 
         [XmlIgnore]

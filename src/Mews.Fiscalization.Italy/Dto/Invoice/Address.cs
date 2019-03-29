@@ -7,7 +7,7 @@ namespace Mews.Fiscalization.Italy.Dto.Invoice
     [Serializable, XmlType(Namespace = ElectronicInvoice.Namespace)]
     public class Address
     {
-        private string zip;
+        private string _zip;
         private string _street;
         private string _city;
 
@@ -29,8 +29,8 @@ namespace Mews.Fiscalization.Italy.Dto.Invoice
         [XmlElement("CAP", Form = XmlSchemaForm.Unqualified)]
         public string Zip
         {
-            get { return zip; }
-            set { zip = value.NormalizeZip(); }
+            get { return _zip; }
+            set { _zip = value.NormalizeZip(); }
         }
 
         [XmlElement("Comune", Form = XmlSchemaForm.Unqualified, DataType = "normalizedString")]

@@ -46,7 +46,7 @@ namespace Mews.Fiscalization.Italy.Dto.Invoice
         public decimal UnitCount
         {
             get { return _unitCount; }
-            set { _unitCount = DtoUtils.Normalize(value); }
+            set { _unitCount = DtoUtils.NormalizeDecimal(value); }
         }
 
         [XmlIgnore]
@@ -87,7 +87,7 @@ namespace Mews.Fiscalization.Italy.Dto.Invoice
         public decimal UnitPrice
         {
             get { return _unitPrice; }
-            set { _unitPrice = DtoUtils.Normalize(value); }
+            set { _unitPrice = DtoUtils.NormalizeDecimal(value); }
         }
 
         /// <summary>
@@ -103,7 +103,7 @@ namespace Mews.Fiscalization.Italy.Dto.Invoice
         public decimal TotalPrice
         {
             get { return _totalPrice; }
-            set { _totalPrice = DtoUtils.Normalize(value); }
+            set { _totalPrice = DtoUtils.NormalizeDecimal(value); }
         }
 
         /// <summary>
@@ -113,7 +113,7 @@ namespace Mews.Fiscalization.Italy.Dto.Invoice
         public decimal VatRate
         {
             get { return _vatRate; }
-            set { _vatRate = DtoUtils.Normalize(value); }
+            set { _vatRate = DtoUtils.NormalizeDecimal(value); }
         }
 
         [XmlElement("Ritenuta", Form = XmlSchemaForm.Unqualified)]
