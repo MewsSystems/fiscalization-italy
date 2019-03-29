@@ -12,6 +12,11 @@ namespace Mews.Fiscalization.Italy
 
         public string FileName { get; }
 
+        public string Content
+        {
+            get { return Encoding.UTF8.GetString(Data); }
+        }
+
         public ElectronicInvoiceFile(ElectronicInvoice invoice)
         {
             Data = Encoding.UTF8.GetBytes(Serialize(invoice));

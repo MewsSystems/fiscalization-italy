@@ -10,6 +10,7 @@ using Mews.Fiscalization.Italy;
 using Mews.Fiscalization.Italy.Dto.Invoice;
 using Mews.Fiscalization.Uniwix.Communication.Dto;
 using Mews.Fiscalization.Uniwix.Dto;
+using Mews.Fiscalization.Uniwix.Exceptions;
 using Newtonsoft.Json;
 
 namespace Mews.Fiscalization.Uniwix.Communication
@@ -35,14 +36,21 @@ namespace Mews.Fiscalization.Uniwix.Communication
         public async Task<SendInvoiceResult> SendInvoiceAsync(ElectronicInvoice invoice)
         {
             var url = $"{UniwixBaseUrl}/Invoices/Upload";
-            var file = new ElectronicInvoiceFile(invoice);
+            var invoiceFile = new ElectronicInvoiceFile(invoice);
             var content = new MultipartFormDataContent
             {
-                { new ByteArrayContent(file.Data), "fattura", file.FileName }
+                { new ByteArrayContent(invoiceFile.Data), "fattura", invoiceFile.FileName }
             };
 
-            var result = await PostAsync<PostInvoiceResponse>(url, content).ConfigureAwait(continueOnCapturedContext: false);
-            return new SendInvoiceResult(result.FileId, result.Message);
+            try
+            {
+                var result = await PostAsync<PostInvoiceResponse>(url, content).ConfigureAwait(continueOnCapturedContext: false);
+                return new SendInvoiceResult(result.FileId, result.Message);
+            }
+            catch (UniwixException e) when (e.Code == (int) UniwixErrorCodes.ValidationError)
+            {
+                throw new UniwixValidationException(e.Code, e.Reason, invoiceFile.Content);
+            }
         }
 
         public async Task<InvoiceState> GetInvoiceStateAsync(string fileId)
@@ -99,7 +107,7 @@ namespace Mews.Fiscalization.Uniwix.Communication
 
                     if (httpResponse.StatusCode == HttpStatusCode.Unauthorized)
                     {
-                        throw new UnauthorizedAccessException();
+                        throw new UniwixAuthorizationException();
                     }
 
                     if (httpResponse.StatusCode == HttpStatusCode.BadRequest)

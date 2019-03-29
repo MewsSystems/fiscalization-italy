@@ -9,6 +9,7 @@ namespace Mews.Fiscalization.Italy.Dto.Invoice
     {
         private decimal _totalAmount;
         private decimal _rounding;
+        private string _documentNumber;
 
         /// <summary>
         /// Required.
@@ -32,7 +33,11 @@ namespace Mews.Fiscalization.Italy.Dto.Invoice
         /// Required. Needs to be unique within (Seller[VatNumber], DocumentType, IssueData[year])
         /// </summary>
         [XmlElement("Numero", Form = XmlSchemaForm.Unqualified, DataType = "normalizedString")]
-        public string DocumentNumber { get; set; }
+        public string DocumentNumber
+        {
+            get { return _documentNumber; }
+            set { _documentNumber = value.NormalizeString(extendedAscii: false); }
+        }
 
         /// <summary>
         /// Required if the seller/provider is subject to withholding tax representing either prepaid tax or the definitive taxation.
@@ -92,7 +97,7 @@ namespace Mews.Fiscalization.Italy.Dto.Invoice
 
         /// <summary>
         /// YES, but only if the document has been is sued according to methods  and terms  laid down  by ministerial  decree pursuant  to article 73 of Italian Presidential Decree 633/72; this enables the seller/provider to issue several documents in the same year with the same numb
-        /// to indicate  whether  the check  must be  carried  out  on the unique numbers  of the  documents  in  the same  year  for  the same transferee/provider; if it is filled in, the check will be carried out.  
+        /// to indicate  whether  the check  must be  carried  out  on the unique numbers  of the  documents  in  the same  year  for  the same transferee/provider; if it is filled in, the check will be carried out.
         /// </summary>
         [XmlElement("Art73", Form = XmlSchemaForm.Unqualified)]
         public Art73Type Art73 { get; set; }

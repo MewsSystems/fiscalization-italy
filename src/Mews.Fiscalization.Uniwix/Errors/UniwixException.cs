@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Mews.Fiscalization.Uniwix
+namespace Mews.Fiscalization.Uniwix.Exceptions
 {
     public class UniwixException : Exception
     {
@@ -9,7 +9,7 @@ namespace Mews.Fiscalization.Uniwix
         public string Reason { get; }
 
         public UniwixException(int code, string reason)
-            : base($"Uniwix error, code: {code}, reason: {reason}")
+            : base($"Uniwix error, code: {code}, reason: {reason}.")
         {
             Code = code;
             Reason = reason;
