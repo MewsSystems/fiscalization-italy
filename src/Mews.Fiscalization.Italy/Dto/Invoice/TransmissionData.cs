@@ -7,6 +7,8 @@ namespace Mews.Fiscalization.Italy.Dto.Invoice
     [Serializable, XmlType(Namespace = ElectronicInvoice.Namespace)]
     public class TransmissionData
     {
+        private string _sequentialNumber;
+
         public TransmissionData()
         {
             TransmissionFormat = TransmissionFormat.FPA12;
@@ -19,7 +21,11 @@ namespace Mews.Fiscalization.Italy.Dto.Invoice
         /// Sender identification.
         /// </summary>
         [XmlElement("ProgressivoInvio", Form = XmlSchemaForm.Unqualified, DataType = "normalizedString")]
-        public string SequentialNumber { get; set; }
+        public string SequentialNumber
+        {
+            get { return _sequentialNumber; }
+            set { _sequentialNumber = value.NormalizeString(extendedAscii: false); }
+        }
 
         [XmlElement("FormatoTrasmissione", Form = XmlSchemaForm.Unqualified)]
         public TransmissionFormat TransmissionFormat { get; set; }

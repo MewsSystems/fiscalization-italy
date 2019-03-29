@@ -11,6 +11,8 @@ namespace Mews.Fiscalization.Italy.Dto.Invoice
         private decimal _unitPrice;
         private decimal _totalPrice;
         private decimal _vatRate;
+        private string _description;
+        private string _measurementUnit;
 
         /// <summary>
         /// Required.
@@ -34,7 +36,11 @@ namespace Mews.Fiscalization.Italy.Dto.Invoice
         public ArticleCode[] ArticleCode { get; set; }
 
         [XmlElement("Descrizione", Form = XmlSchemaForm.Unqualified, DataType = "normalizedString")]
-        public string Description { get; set; }
+        public string Description
+        {
+            get { return _description; }
+            set { _description = value.NormalizeString(); }
+        }
 
         [XmlElement("Quantita", Form = XmlSchemaForm.Unqualified)]
         public decimal UnitCount
@@ -50,7 +56,11 @@ namespace Mews.Fiscalization.Italy.Dto.Invoice
         /// Required if UnitCount is filled in.
         /// </summary>
         [XmlElement("UnitaMisura", Form = XmlSchemaForm.Unqualified, DataType = "normalizedString")]
-        public string MeasurementUnit { get; set; }
+        public string MeasurementUnit
+        {
+            get { return _measurementUnit; }
+            set { _measurementUnit = value.NormalizeString(extendedAscii: false); }
+        }
 
         /// <summary>
         /// Required if the detail  line refers  to a  service which  is provided over a certain length of time and which is invoiced according to distinct periods.

@@ -10,6 +10,8 @@ namespace Mews.Fiscalization.Italy.Dto.Invoice
         private decimal _paymentAmount;
         private decimal _advancePaymentDiscount;
         private decimal _advancePaymentPenalty;
+        private string _payerFirstName;
+        private string _payerLastName;
 
         /// <summary>
         /// Optional. Only if it's different from seller/provider.
@@ -49,10 +51,18 @@ namespace Mews.Fiscalization.Italy.Dto.Invoice
         public string Zip { get; set; }
 
         [XmlElement("CognomeQuietanzante", Form = XmlSchemaForm.Unqualified, DataType = "normalizedString")]
-        public string PayerLastName { get; set; }
+        public string PayerLastName
+        {
+            get { return _payerLastName; }
+            set { _payerLastName = value.NormalizeString(); }
+        }
 
         [XmlElement("NomeQuietanzante", Form = XmlSchemaForm.Unqualified, DataType = "normalizedString")]
-        public string PayerFirstName { get; set; }
+        public string PayerFirstName
+        {
+            get { return _payerFirstName; }
+            set { _payerFirstName = value.Normalize(); }
+        }
 
         [XmlElement("CFQuietanzante", Form = XmlSchemaForm.Unqualified)]
         public string PayerTaxCode { get; set; }

@@ -12,6 +12,7 @@ namespace Mews.Fiscalization.Italy.Dto.Invoice
         private decimal _rounding;
         private decimal _taxableAmount;
         private decimal _taxAmount;
+        private string _normativeReference;
 
         /// <summary>
         /// Required. Percentage.
@@ -85,6 +86,10 @@ namespace Mews.Fiscalization.Italy.Dto.Invoice
         /// Required if Kind is filled in and therefore in the case of transactions which are exempt from  VAT or in the case of a reversed charge.
         /// </summary>
         [XmlElement("RiferimentoNormativo", Form = XmlSchemaForm.Unqualified, DataType = "normalizedString")]
-        public string NormativeReference { get; set; }
+        public string NormativeReference
+        {
+            get { return _normativeReference; }
+            set { _normativeReference = value.NormalizeString(); }
+        }
     }
 }

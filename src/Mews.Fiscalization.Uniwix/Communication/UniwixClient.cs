@@ -97,6 +97,11 @@ namespace Mews.Fiscalization.Uniwix.Communication
                         return JsonConvert.DeserializeObject<Response<TResult>>(json).Result;
                     }
 
+                    if (httpResponse.StatusCode == HttpStatusCode.Unauthorized)
+                    {
+                        throw new UnauthorizedAccessException();
+                    }
+
                     if (httpResponse.StatusCode == HttpStatusCode.BadRequest)
                     {
                         var validationErrorResponse = JsonConvert.DeserializeObject<Response<ValidationError>>(json);
