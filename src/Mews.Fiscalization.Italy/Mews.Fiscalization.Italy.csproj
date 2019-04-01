@@ -10,6 +10,7 @@
     <Description>Client for SDI - Italian fiscal registry.</Description>
     <PackageProjectUrl></PackageProjectUrl>
     <RepositoryUrl>https://github.com/MewsSystems/fiscalization-italy</RepositoryUrl>
+    <Version>1.0.2</Version>
   </PropertyGroup>
 
   <ItemGroup>

@@ -10,7 +10,7 @@ using Mews.Fiscalization.Italy;
 using Mews.Fiscalization.Italy.Dto.Invoice;
 using Mews.Fiscalization.Uniwix.Communication.Dto;
 using Mews.Fiscalization.Uniwix.Dto;
-using Mews.Fiscalization.Uniwix.Exceptions;
+using Mews.Fiscalization.Uniwix.Errors;
 using Newtonsoft.Json;
 
 namespace Mews.Fiscalization.Uniwix.Communication

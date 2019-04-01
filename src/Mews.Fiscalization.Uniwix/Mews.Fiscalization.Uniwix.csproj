@@ -9,6 +9,7 @@
         <Copyright>Copyright 2019</Copyright>
         <Description>Client for Uniwix.</Description>
         <RepositoryUrl>https://github.com/MewsSystems/fiscalization-italy</RepositoryUrl>
+        <Version>1.0.1</Version>
     </PropertyGroup>
 
     <ItemGroup>

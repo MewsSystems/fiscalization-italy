@@ -1,4 +1,4 @@
-namespace Mews.Fiscalization.Uniwix.Exceptions
+namespace Mews.Fiscalization.Uniwix.Errors
 {
     public class UniwixValidationException : UniwixException
     {
