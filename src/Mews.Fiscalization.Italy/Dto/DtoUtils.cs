@@ -13,6 +13,11 @@ namespace Mews.Fiscalization.Italy.Dto
             return Math.Round(value + 0.00m, precision);
         }
 
+        public static decimal? NormalizeDecimal(decimal? value, int precision = 2)
+        {
+            return value == null ? value : NormalizeDecimal(value.Value, precision);
+        }
+
         public static string NormalizeZip(this string zip)
         {
             return Regex.Replace(zip, "[^0-9]", "");

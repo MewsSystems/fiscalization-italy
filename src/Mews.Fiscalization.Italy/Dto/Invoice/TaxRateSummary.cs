@@ -13,6 +13,8 @@ namespace Mews.Fiscalization.Italy.Dto.Invoice
         private decimal _taxableAmount;
         private decimal _taxAmount;
         private string _normativeReference;
+        private TaxKind? _kind;
+        private VatDueDate? _vatDueDate;
 
         /// <summary>
         /// Required. Percentage.
@@ -28,10 +30,18 @@ namespace Mews.Fiscalization.Italy.Dto.Invoice
         /// Required if at least one of the invoice lines has Kind filled in. In those cases, this needs to match.
         /// </summary>
         [XmlElement("Natura", Form = XmlSchemaForm.Unqualified)]
-        public TaxKind Kind { get; set; }
+        public TaxKind? Kind
+        {
+            get { return _kind; }
+            set
+            {
+                _kind = value;
+                KindSpecified = value != null;
+            }
+        }
 
         [XmlIgnore]
-        public bool KindSpecified { get; set; }
+        public bool KindSpecified { get; private set; }
 
         [XmlElement("SpeseAccessorie", Form = XmlSchemaForm.Unqualified)]
         public decimal ComplementaryExpenses
@@ -77,10 +87,18 @@ namespace Mews.Fiscalization.Italy.Dto.Invoice
         /// Required.
         /// </summary>
         [XmlElement("EsigibilitaIVA", Form = XmlSchemaForm.Unqualified)]
-        public VatDueDate VatDueDate { get; set; }
+        public VatDueDate? VatDueDate
+        {
+            get { return _vatDueDate; }
+            set
+            {
+                _vatDueDate = value;
+                VatDueDateSpecified = value != null;
+            }
+        }
 
         [XmlIgnore]
-        public bool VatDueDateSpecified { get; set; }
+        public bool VatDueDateSpecified { get; private set; }
 
         /// <summary>
         /// Required if Kind is filled in and therefore in the case of transactions which are exempt from  VAT or in the case of a reversed charge.

@@ -7,12 +7,15 @@ namespace Mews.Fiscalization.Italy.Dto.Invoice
     [Serializable, XmlType(Namespace = ElectronicInvoice.Namespace)]
     public class InvoiceLine
     {
-        private decimal _unitCount;
+        private decimal? _unitCount;
         private decimal _unitPrice;
         private decimal _totalPrice;
         private decimal _vatRate;
         private string _description;
         private string _measurementUnit;
+        private DateTime? _periodStartingDate;
+        private DateTime? _periodClosingDate;
+        private TaxKind? _kind;
 
         /// <summary>
         /// Required.
@@ -43,14 +46,18 @@ namespace Mews.Fiscalization.Italy.Dto.Invoice
         }
 
         [XmlElement("Quantita", Form = XmlSchemaForm.Unqualified)]
-        public decimal UnitCount
+        public decimal? UnitCount
         {
             get { return _unitCount; }
-            set { _unitCount = DtoUtils.NormalizeDecimal(value); }
+            set
+            {
+                _unitCount = DtoUtils.NormalizeDecimal(value);
+                UnitCountSpecified = value != null;
+            }
         }
 
         [XmlIgnore]
-        public bool UnitCountSpecified { get; set; }
+        public bool UnitCountSpecified { get; private set; }
 
         /// <summary>
         /// Required if UnitCount is filled in.
@@ -66,19 +73,35 @@ namespace Mews.Fiscalization.Italy.Dto.Invoice
         /// Required if the detail  line refers  to a  service which  is provided over a certain length of time and which is invoiced according to distinct periods.
         /// </summary>
         [XmlElement("DataInizioPeriodo", Form = XmlSchemaForm.Unqualified, DataType = "date")]
-        public DateTime PeriodStartingDate { get; set; }
+        public DateTime? PeriodStartingDate
+        {
+            get { return _periodStartingDate; }
+            set
+            {
+                _periodStartingDate = value;
+                PeriodStartingDateSpecified = value != null;
+            }
+        }
 
         [XmlIgnore]
-        public bool PeriodStartingDateSpecified { get; set; }
+        public bool PeriodStartingDateSpecified { get; private set; }
 
         /// <summary>
         /// Required if the detail  line refers  to a  service which  is provided over a certain length of time and which is invoiced according to distinct periods.
         /// </summary>
         [XmlElement("DataFinePeriodo", Form = XmlSchemaForm.Unqualified, DataType = "date")]
-        public DateTime PeriodClosingDate { get; set; }
+        public DateTime? PeriodClosingDate
+        {
+            get { return _periodClosingDate; }
+            set
+            {
+                _periodClosingDate = value;
+                PeriodClosingDateSpecified = value != null;
+            }
+        }
 
         [XmlIgnore]
-        public bool PeriodClosingDateSpecified { get; set; }
+        public bool PeriodClosingDateSpecified { get; private set; }
 
         /// <summary>
         /// Required.
@@ -126,10 +149,18 @@ namespace Mews.Fiscalization.Italy.Dto.Invoice
         /// Required if the transaction is not included in the "taxable" transactions or in the case of a reverse charge.
         /// </summary>
         [XmlElement("Natura", Form = XmlSchemaForm.Unqualified)]
-        public TaxKind Kind { get; set; }
+        public TaxKind? Kind
+        {
+            get { return _kind; }
+            set
+            {
+                _kind = value;
+                KindSpecified = value != null;
+            }
+        }
 
         [XmlIgnore]
-        public bool KindSpecified { get; set; }
+        public bool KindSpecified { get; private set; }
 
         /// <summary>
         /// Recommended.
