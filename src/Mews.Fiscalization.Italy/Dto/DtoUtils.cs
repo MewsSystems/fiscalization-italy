@@ -8,6 +8,9 @@ namespace Mews.Fiscalization.Italy.Dto
 {
     internal static class DtoUtils
     {
+        // Non-breaking space.
+        private const char UnsupportedCharacterSubstitute = (char) 160;
+
         public static decimal NormalizeDecimal(decimal value, int precision = 2)
         {
             return Math.Round(value + 0.00m, precision);
@@ -32,8 +35,18 @@ namespace Mews.Fiscalization.Italy.Dto
 
             var highestCharacter = extendedAscii ? 255 : 127;
             var strippedValue = StripDiacritics(s);
-            var chars = s.Select((c, i) => (int) c <= highestCharacter ? c : strippedValue[i]).ToArray();
+            var chars = s.Select((c, i) => GetCharacterSubstitute(c, GetCharacterSubstitute(strippedValue[i], UnsupportedCharacterSubstitute, highestCharacter), highestCharacter)).ToArray();
             return new String(chars);
+        }
+
+        public static string NonEmptyValueOrNull(this string str)
+        {
+            return String.IsNullOrEmpty(str) ? null : str;
+        }
+
+        private static char GetCharacterSubstitute(char character, char substituteCharacter, int highestValidCharacter)
+        {
+            return (int) character <= highestValidCharacter ? character : substituteCharacter;
         }
 
         private static string StripDiacritics(string s)
