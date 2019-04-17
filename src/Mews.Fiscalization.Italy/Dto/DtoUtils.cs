@@ -30,7 +30,7 @@ namespace Mews.Fiscalization.Italy.Dto
         {
             if (String.IsNullOrWhiteSpace(s))
             {
-                return s;
+                return s.NonEmptyValueOrNull();
             }
 
             var highestCharacter = extendedAscii ? 255 : 127;

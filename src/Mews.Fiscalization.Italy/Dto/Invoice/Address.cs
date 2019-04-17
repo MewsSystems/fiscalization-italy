@@ -23,7 +23,7 @@ namespace Mews.Fiscalization.Italy.Dto.Invoice
         public string Street
         {
             get { return _street; }
-            set { _street = value.NormalizeString().NonEmptyValueOrNull(); }
+            set { _street = value.NormalizeString(); }
         }
 
         [XmlElement("NumeroCivico", Form = XmlSchemaForm.Unqualified, DataType = "normalizedString")]
@@ -44,7 +44,7 @@ namespace Mews.Fiscalization.Italy.Dto.Invoice
         public string City
         {
             get { return _city; }
-            set { _city = value.NormalizeString().NonEmptyValueOrNull(); }
+            set { _city = value.NormalizeString(); }
         }
 
         [XmlElement("Provincia", Form = XmlSchemaForm.Unqualified)]

@@ -8,6 +8,7 @@ namespace Mews.Fiscalization.Italy.Dto.Invoice
     public class TransmissionData
     {
         private string _sequentialNumber;
+        private string _financialOfficeId;
 
         public TransmissionData()
         {
@@ -31,7 +32,11 @@ namespace Mews.Fiscalization.Italy.Dto.Invoice
         public TransmissionFormat TransmissionFormat { get; set; }
 
         [XmlElement("CodiceDestinatario", Form = XmlSchemaForm.Unqualified)]
-        public string FinancialOfficeId { get; set; }
+        public string FinancialOfficeId
+        {
+            get { return _financialOfficeId; }
+            set { _financialOfficeId = value.NonEmptyValueOrNull(); }
+        }
 
         [XmlElement("ContattiTrasmittente", Form = XmlSchemaForm.Unqualified)]
         public TransmitterContact TransmitterContact { get; set; }
