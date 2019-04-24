@@ -12,6 +12,7 @@ namespace Mews.Fiscalization.Italy.Dto.Invoice
         private decimal _advancePaymentPenalty;
         private string _payerFirstName;
         private string _payerLastName;
+        private string _payerTaxCode;
 
         /// <summary>
         /// Optional. Only if it's different from seller/provider.
@@ -65,7 +66,11 @@ namespace Mews.Fiscalization.Italy.Dto.Invoice
         }
 
         [XmlElement("CFQuietanzante", Form = XmlSchemaForm.Unqualified)]
-        public string PayerTaxCode { get; set; }
+        public string PayerTaxCode
+        {
+            get { return _payerTaxCode; }
+            set { _payerTaxCode = value.NonEmptyValueOrNull(); }
+        }
 
         [XmlElement("TitoloQuietanzante", Form = XmlSchemaForm.Unqualified, DataType = "normalizedString")]
         public string PayerTitle { get; set; }
