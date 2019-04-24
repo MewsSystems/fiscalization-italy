@@ -61,7 +61,7 @@ namespace Mews.Fiscalization.Uniwix.Communication
             return new InvoiceState(fileId, GetSdiState(state), state.Message);
         }
 
-        public async Task<UniwixUser> CreateUserAsync(CreateUserParameters createUserParameters)
+        public Task<UniwixUser> CreateUserAsync(CreateUserParameters createUserParameters)
         {
             var url = $"{UniwixBaseUrl}/Users";
             var content = new MultipartFormDataContent
@@ -71,12 +71,18 @@ namespace Mews.Fiscalization.Uniwix.Communication
                 { new StringContent(createUserParameters.Description), "descrizione" },
             };
 
-            return await PostAsync<UniwixUser>(url, content).ConfigureAwait(continueOnCapturedContext: false);
+            return PostAsync<UniwixUser>(url, content);
+        }
+
+        public Task<bool> VerifyCredentialsAsync()
+        {
+            var url = $"{UniwixBaseUrl}/Info";
+            return ExecuteRequestAsync(url, HttpMethod.Get, content: null, responseProcessor: r => r.IsSuccessStatusCode);
         }
 
         private async Task<TResult> GetAsync<TResult>(string url)
         {
-            return await ExecuteRequestAsync<TResult>(url, HttpMethod.Get).ConfigureAwait(continueOnCapturedContext: false);
+            return await ExecuteRequestAsync<TResult>(url, HttpMethod.Get, content: null).ConfigureAwait(continueOnCapturedContext: false);
         }
 
         private async Task<TResult> PostAsync<TResult>(string url, HttpContent content)
@@ -84,7 +90,36 @@ namespace Mews.Fiscalization.Uniwix.Communication
             return await ExecuteRequestAsync<TResult>(url, HttpMethod.Post, content).ConfigureAwait(continueOnCapturedContext: false);
         }
 
-        private async Task<TResult> ExecuteRequestAsync<TResult>(string url, HttpMethod httpMethod, HttpContent content = null)
+        private async Task<TResult> ExecuteRequestAsync<TResult>(string url, HttpMethod httpMethod, HttpContent content)
+        {
+            var response = ExecuteRequestAsync(url, httpMethod, content, async httpResponse =>
+            {
+                var json = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(continueOnCapturedContext: false);
+
+                if (httpResponse.IsSuccessStatusCode)
+                {
+                    return JsonConvert.DeserializeObject<Response<TResult>>(json).Result;
+                }
+
+                if (httpResponse.StatusCode == HttpStatusCode.Unauthorized)
+                {
+                    throw new UniwixAuthorizationException();
+                }
+
+                if (httpResponse.StatusCode == HttpStatusCode.BadRequest)
+                {
+                    var validationErrorResponse = JsonConvert.DeserializeObject<Response<ValidationError>>(json);
+                    throw new UniwixException(validationErrorResponse.Code, validationErrorResponse.Result.Message);
+                }
+
+                var errorResponse = JsonConvert.DeserializeObject<Response<string>>(json);
+                throw new UniwixException(errorResponse.Code, errorResponse.Result);
+            });
+
+            return await (await response.ConfigureAwait(continueOnCapturedContext: false)).ConfigureAwait(continueOnCapturedContext: false);
+        }
+
+        private async Task<TResult> ExecuteRequestAsync<TResult>(string url, HttpMethod httpMethod, HttpContent content, Func<HttpResponseMessage, TResult> responseProcessor)
         {
             var credentials = $"{Configuration.Key}:{Configuration.Password}";
             var authenticationHeaderValue = Convert.ToBase64String(Encoding.ASCII.GetBytes(credentials));
@@ -96,28 +131,16 @@ namespace Mews.Fiscalization.Uniwix.Communication
                 message.Method = httpMethod;
                 message.Headers.Authorization = new AuthenticationHeaderValue("Basic", authenticationHeaderValue);
 
-                using (var httpResponse = await HttpClient.SendAsync(message).ConfigureAwait(continueOnCapturedContext: false))
+                try
                 {
-                    var json = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(continueOnCapturedContext: false);
-
-                    if (httpResponse.IsSuccessStatusCode)
+                    using (var httpResponse = await HttpClient.SendAsync(message).ConfigureAwait(continueOnCapturedContext: false))
                     {
-                        return JsonConvert.DeserializeObject<Response<TResult>>(json).Result;
+                        return responseProcessor(httpResponse);
                     }
-
-                    if (httpResponse.StatusCode == HttpStatusCode.Unauthorized)
-                    {
-                        throw new UniwixAuthorizationException();
-                    }
-
-                    if (httpResponse.StatusCode == HttpStatusCode.BadRequest)
-                    {
-                        var validationErrorResponse = JsonConvert.DeserializeObject<Response<ValidationError>>(json);
-                        throw new UniwixException(validationErrorResponse.Code, validationErrorResponse.Result.Message);
-                    }
-
-                    var errorResponse = JsonConvert.DeserializeObject<Response<string>>(json);
-                    throw new UniwixException(errorResponse.Code, errorResponse.Result);
+                }
+                catch (WebException e)
+                {
+                    throw new UniwixConnectionException(e);
                 }
             }
         }
