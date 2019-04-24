@@ -22,6 +22,7 @@ namespace Mews.Fiscalization.Uniwix.Communication
         static UniwixClient()
         {
             HttpClient = new HttpClient();
+            HttpClient.DefaultRequestHeaders.ExpectContinue = true;
         }
 
         public UniwixClient(UniwixClientConfiguration configuration)
@@ -121,6 +122,11 @@ namespace Mews.Fiscalization.Uniwix.Communication
 
         private async Task<TResult> ExecuteRequestAsync<TResult>(string url, HttpMethod httpMethod, HttpContent content, Func<HttpResponseMessage, TResult> responseProcessor)
         {
+            if (!ServicePointManager.SecurityProtocol.HasFlag(SecurityProtocolType.Tls))
+            {
+                ServicePointManager.SecurityProtocol |= SecurityProtocolType.Tls;
+            }
+
             var credentials = $"{Configuration.Key}:{Configuration.Password}";
             var authenticationHeaderValue = Convert.ToBase64String(Encoding.ASCII.GetBytes(credentials));
 
@@ -137,6 +143,10 @@ namespace Mews.Fiscalization.Uniwix.Communication
                     {
                         return responseProcessor(httpResponse);
                     }
+                }
+                catch (HttpRequestException e)
+                {
+                    throw new UniwixConnectionException(e);
                 }
                 catch (WebException e)
                 {
