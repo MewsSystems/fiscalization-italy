@@ -1,3 +1,4 @@
+using System;
 using Newtonsoft.Json;
 
 namespace Mews.Fiscalization.Uniwix.Communication.Dto
@@ -12,5 +13,8 @@ namespace Mews.Fiscalization.Uniwix.Communication.Dto
 
         [JsonProperty("msg")]
         public string Message { get; set; }
+
+        [JsonProperty("data")]
+        public DateTime Date { get; set; }
     }
 }
