@@ -58,12 +58,13 @@ namespace Mews.Fiscalization.Uniwix.Communication
         {
             var url = $"{UniwixBaseUrl}/Invoices/{fileId}";
             var result = await GetAsync<List<InvoiceStateResult>>(url).ConfigureAwait(continueOnCapturedContext: false);
-            var state = result.OrderByDescending(s => s.Date).Take(1).SingleOrDefault();
-            if (state == null)
+
+            if (result.Count == 0)
             {
                 throw new InvalidOperationException($"Invoice {fileId} not found.");
             }
 
+            var state = result.OrderByDescending(s => s.Date).First();
             return new InvoiceState(fileId, GetSdiState(state), state.Message);
         }
 
