@@ -5,17 +5,14 @@ namespace Mews.Fiscalization.Italy.Constants
 {
     public static class NormativeReference
     {
-        public const string NotTaxable = "";
-        public const string ReversePayment = "";
+        public const string NotSubject = "non soggette";
 
         public static string GetByInvoiceLineKind(TaxKind taxKind)
         {
             switch (taxKind)
             {
-                case TaxKind.NotTaxable:
-                    return NotTaxable;
-                case TaxKind.ReverseCharge:
-                    return ReversePayment;
+                case TaxKind.NotSubject:
+                    return NotSubject;
             }
 
             throw new InvalidOperationException("Unsupported invoice line kind.");

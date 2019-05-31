@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Xml.Schema;
 using System.Xml.Serialization;
 
@@ -8,7 +8,8 @@ namespace Mews.Fiscalization.Italy.Dto.Invoice
     public class TransmissionData
     {
         private string _sequentialNumber;
-        private string _financialOfficeId;
+        private string _destinationCode;
+        private string _destinationEmail;
 
         public TransmissionData()
         {
@@ -32,10 +33,17 @@ namespace Mews.Fiscalization.Italy.Dto.Invoice
         public TransmissionFormat TransmissionFormat { get; set; }
 
         [XmlElement("CodiceDestinatario", Form = XmlSchemaForm.Unqualified)]
-        public string FinancialOfficeId
+        public string DestinationCode
         {
-            get { return _financialOfficeId; }
-            set { _financialOfficeId = value.NonEmptyValueOrNull(); }
+            get { return _destinationCode; }
+            set { _destinationCode = value.NonEmptyValueOrNull(); }
+        }
+
+        [XmlElement("PECDestinatario", Form = XmlSchemaForm.Unqualified)]
+        public string DestinationEmail
+        {
+            get { return _destinationEmail; }
+            set { _destinationEmail = value.NonEmptyValueOrNull(); }
         }
 
         [XmlElement("ContattiTrasmittente", Form = XmlSchemaForm.Unqualified)]
