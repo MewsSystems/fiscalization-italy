@@ -1,3 +1,5 @@
+[![Build Status](https://mews.visualstudio.com/Mews/_apis/build/status/MewsSystems.fiscalization-italy?branchName=master)](https://mews.visualstudio.com/Mews/_build/latest?definitionId=2&branchName=master)
+
 ## This library is a work in progress
 
 # SDI
