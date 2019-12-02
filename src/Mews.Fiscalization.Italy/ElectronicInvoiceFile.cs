@@ -1,6 +1,7 @@
 ﻿using System.Text;
 using System.Xml.Serialization;
 using Mews.Fiscalization.Italy.Dto.Invoice;
+using Mews.Fiscalization.Italy.Utils;
 
 namespace Mews.Fiscalization.Italy
 {
@@ -20,7 +21,7 @@ namespace Mews.Fiscalization.Italy
         public ElectronicInvoiceFile(ElectronicInvoice invoice)
         {
             Data = Encoding.UTF8.GetBytes(Serialize(invoice));
-            FileName = $"{invoice.Header.TransmissionData.SequentialNumber}.xml";
+            FileName = FileUtils.SanitizePath($"{invoice.Header.TransmissionData.SequentialNumber}.xml");
         }
 
         private string Serialize(ElectronicInvoice invoice)
