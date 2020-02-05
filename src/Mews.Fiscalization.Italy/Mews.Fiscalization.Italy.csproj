@@ -6,12 +6,12 @@
     <Authors>Mews Systems</Authors>
     <Company>Mews Systems</Company>
     <PackageTags>sdi fiscalization italy</PackageTags>
-    <Copyright>Copyright 2019</Copyright>
+    <Copyright>Copyright 2020</Copyright>
     <Description>Client for SDI - Italian fiscal registry.</Description>
     <PackageProjectUrl></PackageProjectUrl>
     <RepositoryUrl>https://github.com/MewsSystems/fiscalization-italy</RepositoryUrl>
     <Version>2.0.0</Version>
-    <PackageVersion>2.0.1</PackageVersion>
+    <PackageVersion>2.0.2</PackageVersion>
   </PropertyGroup>
 
   <ItemGroup>
