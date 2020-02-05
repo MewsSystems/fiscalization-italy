@@ -57,7 +57,7 @@ namespace Mews.Fiscalization.Italy.Dto.Invoice
         public decimal Rounding
         {
             get { return _rounding; }
-            set { _rounding = DtoUtils.NormalizeDecimal(value); }
+            set { _rounding = DtoUtils.NormalizeDecimal(value, precision: 8); }
         }
 
         [XmlIgnore]

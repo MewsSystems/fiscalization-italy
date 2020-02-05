@@ -51,7 +51,7 @@ namespace Mews.Fiscalization.Italy.Dto.Invoice
             get { return _unitCount; }
             set
             {
-                _unitCount = DtoUtils.NormalizeDecimal(value);
+                _unitCount = DtoUtils.NormalizeDecimal(value, precision: 8);
                 UnitCountSpecified = value != null;
             }
         }
@@ -110,7 +110,7 @@ namespace Mews.Fiscalization.Italy.Dto.Invoice
         public decimal UnitPrice
         {
             get { return _unitPrice; }
-            set { _unitPrice = DtoUtils.NormalizeDecimal(value); }
+            set { _unitPrice = DtoUtils.NormalizeDecimal(value, precision: 8); }
         }
 
         /// <summary>
@@ -126,7 +126,7 @@ namespace Mews.Fiscalization.Italy.Dto.Invoice
         public decimal TotalPrice
         {
             get { return _totalPrice; }
-            set { _totalPrice = DtoUtils.NormalizeDecimal(value); }
+            set { _totalPrice = DtoUtils.NormalizeDecimal(value, precision: 8); }
         }
 
         /// <summary>
