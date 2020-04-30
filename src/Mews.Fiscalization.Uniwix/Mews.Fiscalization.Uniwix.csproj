@@ -1,27 +1,25 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
-    <PropertyGroup>
-		    <TargetFramework>netstandard2.1</TargetFramework>
-        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-        <Authors>Mews Systems</Authors>
-        <Company>Mews Systems</Company>
-        <PackageTags>uniwix fiscalization italy</PackageTags>
-        <Copyright>Copyright 2020</Copyright>
-        <Description>Client for Uniwix.</Description>
-        <RepositoryUrl>https://github.com/MewsSystems/fiscalization-italy</RepositoryUrl>
-        <Version>1.0.6</Version>
-    </PropertyGroup>
-
-    <ItemGroup>
-      <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <ProjectReference Include="..\Mews.Fiscalization.Italy\Mews.Fiscalization.Italy.csproj" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <Reference Include="System.Net.Http" />
-    </ItemGroup>
-
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Authors>Mews Systems</Authors>
+    <Company>Mews Systems</Company>
+    <PackageTags>uniwix fiscalization italy</PackageTags>
+    <Copyright>Copyright 2020</Copyright>
+    <Description>Client for Uniwix.</Description>
+    <RepositoryUrl>https://github.com/MewsSystems/fiscalization-italy</RepositoryUrl>
+    <Version>1.0.6</Version>
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <ProjectReference Include="..\Mews.Fiscalization.Italy\Mews.Fiscalization.Italy.csproj" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <Reference Include="System.Net.Http" />
+  </ItemGroup>
 </Project>
