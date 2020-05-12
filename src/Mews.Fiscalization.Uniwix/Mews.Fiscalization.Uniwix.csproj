@@ -9,6 +9,7 @@
     <Description>Client for Uniwix.</Description>
     <RepositoryUrl>https://github.com/MewsSystems/fiscalization-italy</RepositoryUrl>
     <Version>1.0.6</Version>
+    <PackageVersion>2.0.0</PackageVersion>
   </PropertyGroup>
   
   <ItemGroup>
