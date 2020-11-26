@@ -27,7 +27,7 @@ namespace Mews.Fiscalization.Italy.Dto.Invoice
         /// Required.
         /// </summary>
         [XmlElement("Data", Form = XmlSchemaForm.Unqualified, DataType = "date")]
-        public DateTime IssueDate { get; set; }
+        public DateTime Issued { get; set; }
 
         /// <summary>
         /// Required. Needs to be unique within (Seller[VatNumber], DocumentType, IssueData[year])
