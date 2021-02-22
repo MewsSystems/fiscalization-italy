@@ -11,7 +11,7 @@
     <RepositoryType>Git</RepositoryType>
     <PackageTags>sdi fiscalization italy</PackageTags>
     <Description>Client for SDI - Italian fiscal registry.</Description>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <IsPackable>false</IsPackable>
   </PropertyGroup>
 
   <ItemGroup>
