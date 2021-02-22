@@ -11,8 +11,6 @@
     <RepositoryType>Git</RepositoryType>
     <PackageTags>uniwix fiscalization italy</PackageTags>
     <Description>Client for Uniwix.</Description>
-    <Version>3.0.2</Version>
-    <PackageVersion>3.0.2</PackageVersion>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
   
