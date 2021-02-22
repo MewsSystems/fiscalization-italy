@@ -18,6 +18,12 @@ We tend to use immutable DTOs wherever possible, especially to ensure data valid
 We want the library to throw an error as soon as possible, i.e. when constructing corresponding data structures.
 That is why we even introduce wrappers for simple datatypes.
 
+## Security protocol
+- TLS 1.0 protocol must be enabled, that can be achieved by adding the following line to your code:
+```csharp
+ServicePointManager.SecurityProtocol |= SecurityProtocolType.Tls;
+```
+
 # NuGet
 
 We have published the library as [Mews.Fiscalization.Italy](https://www.nuget.org/packages/Mews.Fiscalization.Italy/).
