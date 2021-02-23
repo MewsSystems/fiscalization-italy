@@ -128,11 +128,6 @@ namespace Mews.Fiscalization.Uniwix.Communication
 
         private async Task<TResult> ExecuteRequestAsync<TResult>(string url, HttpMethod httpMethod, HttpContent content, Func<HttpResponseMessage, TResult> responseProcessor)
         {
-            if (!ServicePointManager.SecurityProtocol.HasFlag(SecurityProtocolType.Tls))
-            {
-                ServicePointManager.SecurityProtocol |= SecurityProtocolType.Tls;
-            }
-
             var credentials = $"{Configuration.Key}:{Configuration.Password}";
             var authenticationHeaderValue = Convert.ToBase64String(Encoding.ASCII.GetBytes(credentials));
 
